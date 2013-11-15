@@ -1,1 +1,1 @@
-web:    play run --http.port=$PORT $PLAY_OPTS
+web: target/universal/stage/bin/y -Dhttp.port=${PORT} ${JAVA_OPTS}

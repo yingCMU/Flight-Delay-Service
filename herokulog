@@ -1,0 +1,46 @@
+2013-11-15T05:42:51.497924+00:00 heroku[api]: Enable Logplex by liyingcmu@gmail.com
+2013-11-15T05:42:51.532846+00:00 heroku[api]: Release v2 created by liyingcmu@gmail.com
+2013-11-15T05:47:32+00:00 heroku[slug-compiler]: Slug compilation started
+2013-11-15T05:51:40+00:00 heroku[slug-compiler]: Slug compilation failed: Internal error, please try again
+2013-11-15T06:07:41.717239+00:00 heroku[api]: Scale to web=1 by liyingcmu@gmail.com
+2013-11-15T06:07:42.986592+00:00 heroku[api]: Attach HEROKU_POSTGRESQL_PURPLE resource by liyingcmu@gmail.com
+2013-11-15T06:07:43.011674+00:00 heroku[api]: Release v3 created by liyingcmu@gmail.com
+2013-11-15T06:07:43.097391+00:00 heroku[api]: Add DATABASE_URL config by liyingcmu@gmail.com
+2013-11-15T06:07:43.113449+00:00 heroku[api]: Release v4 created by liyingcmu@gmail.com
+2013-11-15T06:07:43.180637+00:00 heroku[api]: Add PATH, JAVA_OPTS, SBT_OPTS, REPO config by liyingcmu@gmail.com
+2013-11-15T06:07:43.204742+00:00 heroku[api]: Release v5 created by liyingcmu@gmail.com
+2013-11-15T06:07:43.275295+00:00 heroku[api]: Deploy 22eb948 by liyingcmu@gmail.com
+2013-11-15T06:07:43.310358+00:00 heroku[api]: Release v6 created by liyingcmu@gmail.com
+2013-11-15T06:07:43+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-11-15T06:07:50.492458+00:00 heroku[web.1]: Starting process with command `target/start -Dhttp.port=${PORT} ${JAVA_OPTS}`
+2013-11-15T06:07:51.349594+00:00 app[web.1]: bash: target/start: No such file or directory
+2013-11-15T06:07:52.454134+00:00 heroku[web.1]: Process exited with status 127
+2013-11-15T06:07:59.535369+00:00 heroku[web.1]: Starting process with command `target/start -Dhttp.port=${PORT} ${JAVA_OPTS}`
+2013-11-15T06:08:00.184601+00:00 app[web.1]: bash: target/start: No such file or directory
+2013-11-15T06:08:01.316071+00:00 heroku[web.1]: Process exited with status 127
+2013-11-15T06:08:01.359352+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-15T06:07:52.475173+00:00 heroku[web.1]: State changed from crashed to starting
+2013-11-15T06:07:52.474600+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-15T06:13:04.517874+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:13:05.143978+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:13:36.672407+00:00 heroku[api]: Scale to web=1 by liyingcmu@gmail.com
+2013-11-15T06:13:57.632521+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:13:57.865142+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:16:09.063744+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:16:09.299685+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:17:46+00:00 heroku[slug-compiler]: Slug compilation started
+2013-11-15T06:18:44.022080+00:00 heroku[web.1]: State changed from crashed to starting
+2013-11-15T06:18:44+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-11-15T06:18:50.795906+00:00 heroku[web.1]: Starting process with command `play run --http.port=5114 $PLAY_OPTS`
+2013-11-15T06:18:52.716976+00:00 app[web.1]: bash: play: command not found
+2013-11-15T06:18:54.122408+00:00 heroku[web.1]: Process exited with status 127
+2013-11-15T06:18:54.154977+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-15T06:18:43.795563+00:00 heroku[api]: Deploy d312508 by liyingcmu@gmail.com
+2013-11-15T06:18:43.819873+00:00 heroku[api]: Release v7 created by liyingcmu@gmail.com
+2013-11-15T06:20:40.752583+00:00 heroku[web.1]: State changed from crashed to starting
+2013-11-15T06:20:47.123333+00:00 heroku[web.1]: Starting process with command `play run --http.port=38021 $PLAY_OPTS`
+2013-11-15T06:20:48.254069+00:00 app[web.1]: bash: play: command not found
+2013-11-15T06:20:49.528310+00:00 heroku[web.1]: Process exited with status 127
+2013-11-15T06:20:49.553141+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-15T06:21:56.907514+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:21:57.248502+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
