@@ -122,7 +122,7 @@ public class FlightQuality{
 	public void fetchRecommendations(){
 
 		YelpFetcher yf = new YelpFetcher();
-		if(this.departDelay <= 120 && this.departDelay > 0){
+		if(this.departDelay <= 120){ //&& this.departDelay > 0){
 			this.recommendations.put("Dining", yf.fetch("fast+food", this.departAirport.getGeoLocation()));
 		}
 		
@@ -130,9 +130,7 @@ public class FlightQuality{
 			this.recommendations.put("Dining", yf.fetch("restaurant", this.departAirport.getGeoLocation()));
 		}
 		
-		else{
-			this.recommendations.put("Dining", yf.fetch("restaurant", this.arrivalAirport.getGeoLocation()));
-		}
+		
 		
 		if(this.departDelay > 0){
 			this.recommendations.put("Accomendation", yf.fetch("hotel", this.departAirport.getGeoLocation()));

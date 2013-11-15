@@ -1,38 +1,3 @@
-2013-11-15T05:42:51.497924+00:00 heroku[api]: Enable Logplex by liyingcmu@gmail.com
-2013-11-15T05:42:51.532846+00:00 heroku[api]: Release v2 created by liyingcmu@gmail.com
-2013-11-15T05:47:32+00:00 heroku[slug-compiler]: Slug compilation started
-2013-11-15T05:51:40+00:00 heroku[slug-compiler]: Slug compilation failed: Internal error, please try again
-2013-11-15T06:07:41.717239+00:00 heroku[api]: Scale to web=1 by liyingcmu@gmail.com
-2013-11-15T06:07:42.986592+00:00 heroku[api]: Attach HEROKU_POSTGRESQL_PURPLE resource by liyingcmu@gmail.com
-2013-11-15T06:07:43.011674+00:00 heroku[api]: Release v3 created by liyingcmu@gmail.com
-2013-11-15T06:07:43.097391+00:00 heroku[api]: Add DATABASE_URL config by liyingcmu@gmail.com
-2013-11-15T06:07:43.113449+00:00 heroku[api]: Release v4 created by liyingcmu@gmail.com
-2013-11-15T06:07:43.180637+00:00 heroku[api]: Add PATH, JAVA_OPTS, SBT_OPTS, REPO config by liyingcmu@gmail.com
-2013-11-15T06:07:43.204742+00:00 heroku[api]: Release v5 created by liyingcmu@gmail.com
-2013-11-15T06:07:43.275295+00:00 heroku[api]: Deploy 22eb948 by liyingcmu@gmail.com
-2013-11-15T06:07:43.310358+00:00 heroku[api]: Release v6 created by liyingcmu@gmail.com
-2013-11-15T06:07:43+00:00 heroku[slug-compiler]: Slug compilation finished
-2013-11-15T06:07:50.492458+00:00 heroku[web.1]: Starting process with command `target/start -Dhttp.port=${PORT} ${JAVA_OPTS}`
-2013-11-15T06:07:51.349594+00:00 app[web.1]: bash: target/start: No such file or directory
-2013-11-15T06:07:52.454134+00:00 heroku[web.1]: Process exited with status 127
-2013-11-15T06:07:59.535369+00:00 heroku[web.1]: Starting process with command `target/start -Dhttp.port=${PORT} ${JAVA_OPTS}`
-2013-11-15T06:08:00.184601+00:00 app[web.1]: bash: target/start: No such file or directory
-2013-11-15T06:08:01.316071+00:00 heroku[web.1]: Process exited with status 127
-2013-11-15T06:08:01.359352+00:00 heroku[web.1]: State changed from starting to crashed
-2013-11-15T06:07:52.475173+00:00 heroku[web.1]: State changed from crashed to starting
-2013-11-15T06:07:52.474600+00:00 heroku[web.1]: State changed from starting to crashed
-2013-11-15T06:13:04.517874+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:13:05.143978+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:13:36.672407+00:00 heroku[api]: Scale to web=1 by liyingcmu@gmail.com
-2013-11-15T06:13:57.632521+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:13:57.865142+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:16:09.063744+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:16:09.299685+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
-2013-11-15T06:17:46+00:00 heroku[slug-compiler]: Slug compilation started
-2013-11-15T06:18:44.022080+00:00 heroku[web.1]: State changed from crashed to starting
-2013-11-15T06:18:44+00:00 heroku[slug-compiler]: Slug compilation finished
-2013-11-15T06:18:50.795906+00:00 heroku[web.1]: Starting process with command `play run --http.port=5114 $PLAY_OPTS`
-2013-11-15T06:18:52.716976+00:00 app[web.1]: bash: play: command not found
 2013-11-15T06:18:54.122408+00:00 heroku[web.1]: Process exited with status 127
 2013-11-15T06:18:54.154977+00:00 heroku[web.1]: State changed from starting to crashed
 2013-11-15T06:18:43.795563+00:00 heroku[api]: Deploy d312508 by liyingcmu@gmail.com
@@ -59,3 +24,78 @@
 2013-11-15T06:48:36.882462+00:00 app[web.1]: Bad application path: -Xmx384m
 2013-11-15T06:48:38.730763+00:00 heroku[web.1]: Process exited with status 0
 2013-11-15T06:48:38.753574+00:00 heroku[web.1]: State changed from starting to crashed
+2013-11-15T06:50:46.538029+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T06:50:47.034506+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno= connect= service= status=503 bytes=
+2013-11-15T07:03:15+00:00 heroku[slug-compiler]: Slug compilation started
+2013-11-15T07:04:14.841066+00:00 heroku[api]: Deploy ff399b6 by liyingcmu@gmail.com
+2013-11-15T07:04:14.883592+00:00 heroku[api]: Release v9 created by liyingcmu@gmail.com
+2013-11-15T07:04:15+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-11-15T07:04:15.503675+00:00 heroku[web.1]: State changed from crashed to starting
+2013-11-15T07:04:23.103382+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/y -Dhttp.port=${PORT}`
+2013-11-15T07:04:23.894338+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS:  -Djava.rmi.server.useCodebaseOnly=true
+2013-11-15T07:04:24.401403+00:00 app[web.1]: Play server process ID is 2
+2013-11-15T07:04:25.813890+00:00 app[web.1]: [[37minfo[0m] play - Application started (Prod)
+2013-11-15T07:04:25.936929+00:00 app[web.1]: [[37minfo[0m] play - Listening for HTTP on /0:0:0:0:0:0:0:0:6888
+2013-11-15T07:04:26.240933+00:00 heroku[web.1]: State changed from starting to up
+2013-11-15T07:05:54.842001+00:00 heroku[router]: at=info method=GET path=/assets/javascripts/jquery-1.8.3.min.js host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=0ms service=18ms status=404 bytes=0
+2013-11-15T07:05:54.842547+00:00 heroku[router]: at=info method=GET path=/assets/stylesheets/style.css host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=0ms service=122ms status=404 bytes=0
+2013-11-15T07:05:55.423417+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=0ms service=24ms status=404 bytes=1910
+2013-11-15T07:05:54.559476+00:00 heroku[router]: at=info method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=0ms service=1004ms status=200 bytes=6027
+2013-11-15T07:07:10.618438+00:00 app[web.1]: UA986 LFPG  ORD
+2013-11-15T07:07:10.618438+00:00 app[web.1]: aircraft B763 status Arrived ; deptime 14 time:1253 1514
+2013-11-15T07:07:11.118849+00:00 app[web.1]: Date: 2013-1-1; Carrier : UA; Flight Number: 986's Service quality: 
+2013-11-15T07:07:11.118849+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-11-15T07:07:11.119461+00:00 app[web.1]: Date: 2013-1-1; Carrier : UA; Flight Number: 986's Service quality: 
+2013-11-15T07:07:11.119198+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-11-15T07:07:11.119461+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-11-15T07:07:11.119686+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-11-15T07:07:11.123000+00:00 app[web.1]: connecting....
+2013-11-15T07:07:11.377059+00:00 app[web.1]: connecting established
+2013-11-15T07:07:11.377059+00:00 app[web.1]: Connection: com.sap.db.jdbc.trace.Connection@11b9e38a
+2013-11-15T07:07:11.419279+00:00 app[web.1]: INSERT INTO TESTINGTABLE_11 VALUES(1,1,2,4,'UA','CDG','ORD',1514)
+2013-11-15T07:07:11.469579+00:00 app[web.1]: CREATE LOCAL TEMPORARY COLUMN TABLE PAL_CONTROL_TBL LIKE PAL_CONTROL_T
+2013-11-15T07:07:11.493806+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_11 LIKE PAL_PCDT_RESULT_T
+2013-11-15T07:07:11.516608+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_11 LIKE PAL_PCDT_RESULT_T
+2013-11-15T07:07:11.548038+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT_Y(TESTINGTABLE_11, "PAL_CONTROL_TBL",PAL_CDT_JSONMODEL_SFO_11,RESULT_SFO_11 ) with overview
+2013-11-15T07:07:11.548038+00:00 app[web.1]: predicting..........
+2013-11-15T07:07:11.599358+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT_Y(TESTINGTABLE_11, "PAL_CONTROL_TBL",PAL_CDT_JSONMODEL_SFO_11,RESULT_SFO_11 ) with overview
+2013-11-15T07:07:40.069028+00:00 heroku[router]: at=error code=H12 desc="Request timeout" method=GET path=/predictions/UA986/2013-1-1 host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=30000ms status=503 bytes=0
+2013-11-15T07:07:40.521290+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=9ms status=404 bytes=1910
+2013-11-15T07:07:40.651288+00:00 heroku[router]: at=info method=GET path=/recommendations/san+francisco/food host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=848ms status=200 bytes=985
+2013-11-15T07:07:40.955395+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=7ms status=404 bytes=1910
+2013-11-15T07:07:42.164283+00:00 app[web.1]: select *  from "RESULT_SFO_11"
+2013-11-15T07:07:42.175995+00:00 app[web.1]: --success-------prediction done----
+2013-11-15T07:07:42.175995+00:00 app[web.1]: ----------
+2013-11-15T07:07:42.175995+00:00 app[web.1]: -1
+2013-11-15T07:09:19.504512+00:00 heroku[router]: at=info method=GET path=/recommendations/san+francisco/food host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=1ms service=537ms status=200 bytes=985
+2013-11-15T07:09:20.484560+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=1ms service=11ms status=404 bytes=1910
+2013-11-15T07:09:28.937891+00:00 heroku[router]: at=info method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=11ms status=200 bytes=6027
+2013-11-15T07:09:29.082398+00:00 heroku[router]: at=info method=GET path=/assets/stylesheets/style.css host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=8ms status=404 bytes=0
+2013-11-15T07:09:29.095273+00:00 heroku[router]: at=info method=GET path=/assets/javascripts/jquery-1.8.3.min.js host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=2ms service=5ms status=404 bytes=0
+2013-11-15T07:09:29.362708+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=5ms status=404 bytes=1910
+2013-11-15T07:09:58.278026+00:00 heroku[router]: at=info method=GET path=/recommendations/san+francisco/food host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=0ms service=706ms status=200 bytes=985
+2013-11-15T07:10:03.780050+00:00 heroku[router]: at=info method=GET path=/recommendations/sfo%20airport/food host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=7ms service=470ms status=200 bytes=1055
+2013-11-15T07:11:17.251860+00:00 app[web.1]: UA986 LFPG  ORD
+2013-11-15T07:11:17.251860+00:00 app[web.1]: aircraft B763 status Arrived ; deptime 14 time:1253 1514
+2013-11-15T07:11:17.253134+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-11-15T07:11:17.253134+00:00 app[web.1]: Date: 2013-1-1; Carrier : UA; Flight Number: 986's Service quality: 
+2013-11-15T07:11:17.253134+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-11-15T07:11:17.253257+00:00 app[web.1]: Date: 2013-1-1; Carrier : UA; Flight Number: 986's Service quality: 
+2013-11-15T07:11:17.253257+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-11-15T07:11:17.253257+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-11-15T07:11:17.253364+00:00 app[web.1]: connecting....
+2013-11-15T07:11:17.279278+00:00 app[web.1]: connecting established
+2013-11-15T07:11:17.279429+00:00 app[web.1]: Connection: com.sap.db.jdbc.trace.Connection@57628c1c
+2013-11-15T07:11:17.313021+00:00 app[web.1]: INSERT INTO TESTINGTABLE_11 VALUES(1,1,2,4,'UA','CDG','ORD',1514)
+2013-11-15T07:11:17.366189+00:00 app[web.1]: CREATE LOCAL TEMPORARY COLUMN TABLE PAL_CONTROL_TBL LIKE PAL_CONTROL_T
+2013-11-15T07:11:17.393525+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_11 LIKE PAL_PCDT_RESULT_T
+2013-11-15T07:11:17.416810+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_11 LIKE PAL_PCDT_RESULT_T
+2013-11-15T07:11:17.451152+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT_Y(TESTINGTABLE_11, "PAL_CONTROL_TBL",PAL_CDT_JSONMODEL_SFO_11,RESULT_SFO_11 ) with overview
+2013-11-15T07:11:17.451152+00:00 app[web.1]: predicting..........
+2013-11-15T07:11:17.458664+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT_Y(TESTINGTABLE_11, "PAL_CONTROL_TBL",PAL_CDT_JSONMODEL_SFO_11,RESULT_SFO_11 ) with overview
+2013-11-15T07:11:46.975929+00:00 heroku[router]: at=error code=H12 desc="Request timeout" method=GET path=/predictions/UA986/2013-1-1 host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=30007ms status=503 bytes=0
+2013-11-15T07:11:47.191536+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="50.136.207.171" dyno=web.1 connect=1ms service=6ms status=404 bytes=1910
+2013-11-15T07:11:47.411551+00:00 app[web.1]: select *  from "RESULT_SFO_11"
+2013-11-15T07:11:47.418940+00:00 app[web.1]: ----------
+2013-11-15T07:11:47.418940+00:00 app[web.1]: --success-------prediction done----
+2013-11-15T07:11:47.418940+00:00 app[web.1]: -1
