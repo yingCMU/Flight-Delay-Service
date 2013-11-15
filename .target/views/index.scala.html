@@ -1,0 +1,154 @@
+@(message: String)@theme(title = "Home") {
+  <style>
+  .code{
+  	background-color: black;
+  	color: white;
+  	margin-left: 20px;
+  	padding: 15px;
+  	width: 93%;
+
+  }
+  .code .variable{
+  	color: yellow;
+  }
+  .description{
+  	font-weight: bolder;
+  	margin-top: 30px;
+  }
+  </style>
+  <script>
+  $(window).load(function(){
+	  $("a").each(function(){
+		var d =  new Date();
+		var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+	  	if(/^http:\/\/flight-prediction\.herokuapp\.com\//.test($(this).attr("href"))){
+	  		$(this).attr("href", $(this).attr("href").replace("2012-12-10",strDate));
+	  		$(this).text($(this).text().replace("2012-12-10",strDate));
+	  	}		
+	  });  
+  });
+  	
+  </script>
+  <h1>Usage</h1>
+  <h2>Predict Flight Service Quality</h2>
+  <ul>
+  	<li>
+   		<div class='description'>To Predict a flight service:</div>
+  		<div>
+  			<div class='code'>http://flight-prediction.herokuapp.com/predictions/<span class='variable'>Airline</span>/<span class='variable'>FlightNumber</span>/<span class='variable'>Date</span>/<span class='variable'>ArrivalAirportCode</span>/<span class='variable'>DepartureAirportCode</span></div>
+  			e.g.
+  			<div><a href='http://flight-prediction.herokuapp.com/predictions/DELTA/DL123/2012-12-10/SFO/SEA'>http://flight-prediction.herokuapp.com/predictions/DELTA/DL123/2012-12-10/SFO/SEA</a></div>  	
+  		</div>
+  		<div>
+  			<span style="font-size:bold;">Sample Output</span>
+<pre>
+ {
+  	"departDelay":50,
+  	"arrivalDelay":19,
+  	"departAirport":{
+  		"name":"SFO",
+  		"geoLocation":{
+  			"city":"San Mateo, California",
+  			"longitude":-122.389979,
+  			"latitude":37.615223,
+  			"zipCode":"94128"
+  		}
+  	},
+  	"arrivalAirport":{
+  		"name":"SEA",
+  		"geoLocation":{
+  			"city":"King, Washington",
+  			"longitude":-122.300497,
+  			"latitude":47.44443,
+  			"zipCode":"98158"
+  		}
+  	},
+  	"departWeather":{
+  		"temp":41.5,
+  		"visibility":-1,
+  		"date":"Dec 13, 2012 12:00:00 AM",
+  		"windSpeed":7.0,
+  		"weatherCode":119,
+  		"weatherDescription":"Cloudy",
+  		"weatherIcon":"http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0003_white_cloud.png",
+  		"barometricPressure":-1
+  	},
+  	"arrivalWeather":{
+  		"temp":41.5,
+  		"visibility":-1,
+  		"date":"Dec 13, 2012 12:00:00 AM",
+  		"windSpeed":7.0,
+  		"weatherCode":119,
+  		"weatherDescription":"Cloudy",
+  		"weatherIcon":"http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0003_white_cloud.png",
+  		"barometricPressure":-1
+  	},
+  	"airline":"DELTA",
+  	"date":"13 Dec 2012 00:00:00 GMT"
+ }
+</pre>
+  		</div>
+  	</li>
+  </ul>  
+  <h2>Fetch Weather</h2>
+  <ul>
+  	<li>
+  		<div>
+			<div class='description'>To Fetch Weather forecast</div>
+			<div class='code'>http://flight-prediction.herokuapp.com/weathers/CityName(.json/csv)</div>
+			e.g.
+			<div>
+				<a href='http://flight-prediction.herokuapp.com/weathers/mountain%20view.csv'>http://flight-prediction.herokuapp.com/weathers/mountain%20view.csv</a><br/>
+				<a href='http://flight-prediction.herokuapp.com/weathers/mountain%20view.json'>http://flight-prediction.herokuapp.com/weathers/mountain%20view.json</a>
+			</div>
+  		</div>
+  	</li>
+ 	<li>
+ 		<div>
+			<div class='description'>To Fetch Weather for specific date:</div>
+			<div class='code'>http://flight-prediction.herokuapp.com/weathers/CityName/Date(.json/csv)</div>
+			e.g.
+			<div>
+				<a href='http://flight-prediction.herokuapp.com/weathers/mountain%20view/2012-12-10.json'>http://flight-prediction.herokuapp.com/weathers/mountain%20view/2012-12-10.json</a><br/>
+				<a href='http://flight-prediction.herokuapp.com/weathers/mountain%20view/2012-12-10.csv'>http://flight-prediction.herokuapp.com/weathers/mountain%20view/2012-12-10.csv</a>
+			</div>
+		</div>
+	</li>
+  </ul>
+  <h2>Fetch Flight Information (Currently only support PHL)</h2>
+  <ul>
+	<li>
+		<div class='description'>To Fetch Current flight Information</div>
+		<div class='code'>http://flight-prediction.herokuapp.com/flights</div>
+		e.g.
+		<div>
+			<a href='http://flight-prediction.herokuapp.com/flights'>http://flight-prediction.herokuapp.com/flights</a><br/>
+		</div>
+		<div>
+  			<span style="font-size:bold;">Sample Output</span>
+<pre>
+[
+	{
+		flightNumber: "797",
+		departDelay: 0,
+		arrivalDelay: 0,
+		departAirport: {
+			name: "TEL AVIV",
+			geoLocation: null
+		},
+		arrivalAirport: {
+			name: "PHL",
+			geoLocation: null
+		},
+		departWeather: null,
+		arrivalWeather: null,
+		airline: "US Airways",
+		date: "15 Dec 2012 13:20:00 GMT"
+	}
+]
+</pre>
+		</div>
+	</li>  
+  </ul>
+
+}
