@@ -119,30 +119,30 @@ public class FlightQuality{
 		this.departWeather = WeatherFetcher.Fetch(this.departAirport.getGeoLocation().city,new SimpleDateFormat("yyyy-mm-dd").format( this.depDate));
 		this.arrivalWeather = WeatherFetcher.Fetch(this.arrivalAirport.getGeoLocation().city,new SimpleDateFormat("yyyy-mm-dd").format(  this.arrivalDate));
 	}
-	public void fetchRecommendations(){
+	/*public void fetchRecommendations(){
 
 		YelpFetcher yf = new YelpFetcher();
 		if(this.departDelay <= 120){ //&& this.departDelay > 0){
-			this.recommendations.put("Dining", yf.fetch("fast+food", this.departAirport.getGeoLocation()));
+			this.recommendations.put("Dining", yf.fetch("fast+food", this.departAirport.getGeoLocation(),"3"));
 		}
 		
 		else if(this.departDelay >= 120){
-			this.recommendations.put("Dining", yf.fetch("restaurant", this.departAirport.getGeoLocation()));
+			this.recommendations.put("Dining", yf.fetch("restaurant", this.departAirport.getGeoLocation(),"3"));
 		}
 		
 		
 		
 		if(this.departDelay > 0){
-			this.recommendations.put("Accomendation", yf.fetch("hotel", this.departAirport.getGeoLocation()));
-			this.recommendations.put("Transportation", yf.fetch("transportation", this.departAirport.getGeoLocation()));
+			this.recommendations.put("Accomendation", yf.fetch("hotel", this.departAirport.getGeoLocation(),"3"));
+			this.recommendations.put("Transportation", yf.fetch("transportation", this.departAirport.getGeoLocation(),"3"));
 		}
 		
 		else{
-			this.recommendations.put("Accomendation", yf.fetch("hotel", this.arrivalAirport.getGeoLocation()));
-			this.recommendations.put("Transportation", yf.fetch("transportation", this.departAirport.getGeoLocation()));
+			this.recommendations.put("Accomendation", yf.fetch("hotel", this.arrivalAirport.getGeoLocation(),"3"));
+			this.recommendations.put("Transportation", yf.fetch("transportation", this.departAirport.getGeoLocation(),"3"));
 		}
 		
-	}
+	}*/
 	public String toString(){
 		return "Date: "+this.depDate+"; Carrier : "+airline+"; Flight Number: " + this.flightNumber + "'s Service quality: \n" +
 				"Delay on departure in " + this.departDelay + " minutes\n" +

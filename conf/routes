@@ -12,9 +12,9 @@ GET     /                           controllers.Application.index()
 
 # WeatherForecast
 GET		/weathers/:city/:date.:format				controllers.Application.weather(format: String, city: String, date:String)
-GET		/weathers/:city/:date				controllers.Application.weather(format = "json", city: String, date:String)
+#GET		/weathers/:city/:date				controllers.Application.weather(format = "json", city: String, date:String)
 GET		/weathers/:city.:format				controllers.Application.weathers(format: String, city: String)
-GET		/weathers/:city							controllers.Application.weathers(format = "json", city: String)
+#GET		/weathers/:city							controllers.Application.weathers(format = "json", city: String)
 
 # Prediction
 #GET		/predictions/:flightNumber		controllers.Application.predictions(airline = "DELTA", flightNumber: String, date = "", departure = "SFO", arrival = "SEA")
@@ -22,7 +22,9 @@ GET		/predictions/:flightID/:date	controllers.Application.predictions(flightID: 
 
 
 # Recommendations
-GET 	/recommendations/:city/:query 		controllers.Application.recommendations(query: String, city: String)
+#GET 	/recommendations/:city/:query 		controllers.Application.recommendations(query: String, city: String)
+GET 	/recommendations/:log/:lat/:radius/:query/:limit	controllers.Application.recommendations(query: String, log: String,lat: String,radius: String, limit: String)
+GET 	/recommendations/:log/:lat/:radius	controllers.Application.recommendations( log: String, lat: String,radius: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

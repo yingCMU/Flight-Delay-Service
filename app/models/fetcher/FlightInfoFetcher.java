@@ -19,7 +19,7 @@ import org.jsoup.select.Elements;
 
 public class FlightInfoFetcher {
 	public static void main(String [ ] args) throws IOException, ParseException{
-		 FlightInfoFetcher.fetch("AA1673","2013-11-8");
+		 FlightInfoFetcher.fetch("UA502","2013-11-8");
 	}
 	public FlightInfoFetcher() throws IOException{
 		

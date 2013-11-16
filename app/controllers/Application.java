@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import models.Airport;
+import models.GeoLocation;
 import models.Prediction;
 import models.Weather;
 import models.YelpRecommendations;
@@ -45,13 +46,44 @@ public class Application extends Controller {
 	  }
 	  return ok(new ObjectMapper().writeValueAsString(w));
   }
-  
+  /*
   public  static Result recommendations(String query, String location) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
 	  YelpFetcher yf = new YelpFetcher();
 	  YelpRecommendations yrs = yf.fetch(query, location);
 	  return ok(new ObjectMapper().writeValueAsString(yrs));
   }
+  */
+  public  static Result recommendations(String query, String log, String lat, String radius,String limit) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
+	  YelpFetcher yf = new YelpFetcher();
+	  GeoLocation geo = new GeoLocation(Double.parseDouble(log),Double.parseDouble(lat));
+	  /* System.out.println("application :"+log+" "+lat);
+	//  YelpRecommendations yrs = yf.fetch(query,geo,radius);*/
+	  System.out.println("!!!!!!!!!!!!!!");
+	  String[] words = query.split(",");
+	  HashMap<String, YelpRecommendations> yrs = new HashMap<String, YelpRecommendations>(words.length);
+	  for (String word: words){
+		  System.out.println(word);
+		  yrs.put(word, yf.fetch(word, geo,radius,limit));
+	  }
+	 	
+	 		
+	 return ok(new ObjectMapper().writeValueAsString(yrs));
+  }
   
+  public  static Result recommendations( String log, String lat, String radius) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
+	  YelpFetcher yf = new YelpFetcher();
+	  GeoLocation geo = new GeoLocation(Double.parseDouble(log),Double.parseDouble(lat));
+	  /* System.out.println("application :"+log+" "+lat);
+	//  YelpRecommendations yrs = yf.fetch(query,geo,radius);*/
+	  System.out.println("!!!!!!!!!!!!!!");
+	  HashMap<String, YelpRecommendations> yrs = new HashMap<String, YelpRecommendations>();
+	  yrs.put("hotel", yf.fetch("hotel", geo,radius,"5"));
+	
+	  yrs.put("res", yf.fetch("res", geo,radius,"5"));
+		
+	 		
+	 return ok(new ObjectMapper().writeValueAsString(yrs));
+  }
   public static Result predictions(String flightID, String strDate) throws JsonGenerationException, JsonMappingException, IOException, ParseException{
 	  Prediction p = new Prediction();
 	  Date d = new Date();
