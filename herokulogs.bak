@@ -6,12 +6,14 @@ http://localhost:9000/predictions/UA502/2013-12-01/SFO
 
 Recommendation API
 
-1. to search for some categories, you might need bigger range. (by the way , the radius parameter is in miles)
+1. to search for some categories, you might need bigger range. 
 You can try this , I added some filter so it gives better result
 http://localhost:9000/recommendations/-122.374889/37.618972/5/hotels/15
 
 
-2. I can only show phone: "+1-650-692-3500"
+2. From the same picture, why isn’t the phone number in the result a formatted one? I found it on Yelp as "(877) 359-8474” However, I’m not sure about this, probably Yelp just return “display_phone” like this. Please correct my if I misunderstood.
+
+Expected result: A formatted phone number like: “phone”: "(877) 359-8474"
 
 3. There is an excess field named “categories”. Why is this field empty in every recommendation? However, the “category” field is good. I’ll use this for a display in the app.
 

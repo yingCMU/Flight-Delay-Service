@@ -18,7 +18,7 @@ GET		/weathers/:city.:format				controllers.Application.weathers(format: String,
 
 # Prediction
 #GET		/predictions/:flightNumber		controllers.Application.predictions(airline = "DELTA", flightNumber: String, date = "", departure = "SFO", arrival = "SEA")
-GET		/predictions/:flightID/:date	controllers.Application.predictions(flightID: String, date: String)
+GET		/predictions/:flightID/:date/:origin	controllers.Application.predictions(flightID: String, date: String,origin: String)
 
 
 # Recommendations

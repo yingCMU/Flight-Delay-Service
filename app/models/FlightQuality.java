@@ -12,14 +12,15 @@ import models.fetcher.WeatherFetcher;
 import models.fetcher.YelpFetcher;
 
 public class FlightQuality{
-	protected TimeZone depTZ;
-	protected TimeZone arrTZ;
+	//protected TimeZone depTZ;
+	//protected TimeZone arrTZ;
 	
 	protected String flightNumber;
 	private int DAY_OF_WEEK;
 	private int DAY_OF_MONTH;
 	protected int departDelay;
 	protected int arrivalDelay;
+	private String airlineName;
 	protected Airport departAirport;
 	protected Airport arrivalAirport;
 	protected Weather departWeather;
@@ -58,12 +59,7 @@ public class FlightQuality{
 	public String getArrivalTime(){
 		return this.arrTime;
 	}
-	public TimeZone getArrTZ(){
-		return this.arrTZ;
-	}
-	public TimeZone getDepTZ(){
-		return this.depTZ;
-	}
+	
 	public String getDepTime(){
 		return this.depTime;
 	}
@@ -134,11 +130,11 @@ public class FlightQuality{
 		this.departWeather = WeatherFetcher.Fetch(this.departAirport.getGeoLocation(), this.depDate);
 		this.arrivalWeather = WeatherFetcher.Fetch(this.arrivalAirport.getGeoLocation(),this.arrivalDate);
 	}
-	public void fetchTimeZone(){
+	/*public void fetchTimeZone(){
 		//System.out.println("!!!!!!!"+this.depDate);
 		this.depTZ = TimeZoneFetcher.fetch(this.departAirport.getGeoLocation());
 		this.arrTZ = TimeZoneFetcher.fetch(this.arrivalAirport.getGeoLocation());
-	}
+	}*/
 	/*public void fetchRecommendations(){
 
 		YelpFetcher yf = new YelpFetcher();
@@ -183,5 +179,11 @@ public class FlightQuality{
 	public int getQuater() {
 		// TODO Auto-generated method stub
 		return quater;
+	}
+	public String getAirlineName() {
+		return airlineName;
+	}
+	public void setAirlineName(String airlineName) {
+		this.airlineName = airlineName;
 	}
 }

@@ -58,7 +58,6 @@ public class Application extends Controller {
 	  GeoLocation geo = new GeoLocation(Double.parseDouble(log),Double.parseDouble(lat));
 	  /* System.out.println("application :"+log+" "+lat);
 	//  YelpRecommendations yrs = yf.fetch(query,geo,radius);*/
-	  System.out.println("!!!!!!!!!!!!!!");
 	  String[] words = query.split(",");
 	  HashMap<String, YelpRecommendations> yrs = new HashMap<String, YelpRecommendations>(words.length);
 	  for (String word: words){
@@ -84,7 +83,7 @@ public class Application extends Controller {
 	 		
 	 return ok(new ObjectMapper().writeValueAsString(yrs));
   }
-  public static Result predictions(String flightID, String strDate) throws JsonGenerationException, JsonMappingException, IOException, ParseException{
+  public static Result predictions(String flightID, String strDate,String origin) throws JsonGenerationException, JsonMappingException, IOException, ParseException{
 	  Prediction p = new Prediction();
 	  Date d = new Date();
 	  if(!strDate.equals("")){

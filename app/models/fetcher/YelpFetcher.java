@@ -73,13 +73,17 @@ public class YelpFetcher {
 	public YelpRecommendations fetch(String term, GeoLocation city,String radius,String limit) {
 		OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
 		request.addQuerystringParameter("term", term);
-		System.out.println("yelp fething term="+term);
+		request.addQuerystringParameter("category_filter",term);
+		System.out.println("term is "+term);
 		request.addQuerystringParameter("ll", city.getLatitude() + "," + city.getLongitude());
 		request.addQuerystringParameter("radius_filter", ""+Integer.parseInt(radius)*1609);
 		//radius in miles, filter in meters
 		request.addQuerystringParameter("sort", "1");
 		request.addQuerystringParameter("limit", limit);
+		//System.out.println("yelp fething term="+request.);
+		
 		YelpRecommendations rs = this.fetch(request);
+		
 		return rs;
 	}
 	
@@ -93,9 +97,9 @@ public class YelpFetcher {
 	protected YelpRecommendations fetch(OAuthRequest request) {
 		this.reset();
 		
-		
 		service.signRequest(accessToken, request);
 		Response response = request.send();
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		YelpRecommendations recommendations = null;
 		String responseBody = response.getBody(); 
@@ -115,13 +119,20 @@ public class YelpFetcher {
 				double rating  = 0;
 				String rating_img_url="";
 				String image_url = "";
-				String categories="";
+				String categories=null;
 				try{
 					rating = business.get("rating").asDouble();
 					rating_img_url = business.get("rating_img_url").asText();
 					image_url = business.get("image_url").asText();
-					categories = business.get("categories").asText();
 					
+					JsonNode catNode= business.get("categories").get(0);//.get("display_address").get(0).asText();
+					//System.out.println("@@@###########################"+catNode.asText());
+					categories = catNode.get(0).asText();
+					for (int j = 1; i < catNode.size(); j++) {
+						JsonNode cat = catNode.get(j);
+						categories +=","+ cat.asText();
+						//System.out.println(cat.asText());
+					}
 				}
 				catch(Exception e){
 					
@@ -164,7 +175,7 @@ public class YelpFetcher {
 				}
 				String display_phone = "";
 				try{
-					display_phone = business.get("phone").asText();
+					display_phone = business.get("display_phone").asText();
 				}
 				catch (Exception e){
 					
@@ -207,14 +218,14 @@ public class YelpFetcher {
 		//ArrayList<YelpBiz> rl = yf.fetch("restaurant", Airport.findAirport("SFO").getGeoLocation(), "1").getRecommendations();
 		 GeoLocation geo = new GeoLocation(Double.parseDouble("-122.374889"),Double.parseDouble("37.618972"));
 		//HashMap<String, YelpRecommendations> map = yf.fetchMultiply("", geo, "5");
-		yf.fetch("hotel",geo,"1","5");
+		//yf.fetch("hotel",geo,"1","5");
 		//YelpRecommendations rm = map.get("Transportation"); 
 		//rm.
-		/* ArrayList<YelpBiz> rl= yf.fetch("hotel",geo,"1").getRecommendations();
+		 ArrayList<YelpBiz> rl= yf.fetch("hotel",geo,"1","5").getRecommendations();
 		 System.out.println(rl.size()); 
 		 for(YelpBiz r :rl)
 				System.out.println(r.toString());
-			*/ 
+			 
 		//System.out.println(yf.fetch("restaurant", "94086").getRecommendations());
 		
 	}

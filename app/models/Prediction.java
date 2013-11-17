@@ -111,7 +111,7 @@ public class Prediction {
 		
 		makePrediction2(quality);
 		quality.fetchWeather();
-		quality.fetchTimeZone();
+		//quality.fetchTimeZone();
 		
 		//quality.fetchRecommendations();
 		return quality;
