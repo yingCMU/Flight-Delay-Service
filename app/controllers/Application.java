@@ -70,7 +70,7 @@ public class Application extends Controller {
 	 return ok(new ObjectMapper().writeValueAsString(yrs));
   }
   
-  public  static Result recommendations( String log, String lat, String radius) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
+  public  static Result recommendations2( String log, String lat, String radius) throws ParseException, JsonGenerationException, JsonMappingException, IOException{
 	  YelpFetcher yf = new YelpFetcher();
 	  GeoLocation geo = new GeoLocation(Double.parseDouble(log),Double.parseDouble(lat));
 	  /* System.out.println("application :"+log+" "+lat);
