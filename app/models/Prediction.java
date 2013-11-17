@@ -109,9 +109,9 @@ public class Prediction {
 		
 		}
 		
-		//quality.fetchWeather();
-		
 		makePrediction2(quality);
+		quality.fetchWeather();
+		quality.fetchTimeZone();
 		
 		//quality.fetchRecommendations();
 		return quality;
@@ -128,6 +128,7 @@ public class Prediction {
 
 	}
 	protected void makePrediction2(FlightQuality fq){
+		/*
 		System.out.println(fq.toString());
 		
 		//HANASQL hana = new HANASQL(fq);
@@ -171,8 +172,9 @@ public class Prediction {
 		}
 		String response = getStringFromInputStream(content);
 		System.out.println("responseBody " + response);
+		
+		//fq.setDelay(Integer.parseInt(response)*15,11);*/
 		fq.setDelay(0, 0);
-		//fq.setDelay(Integer.parseInt(response)*15,11);
 		return ;
 
 	}

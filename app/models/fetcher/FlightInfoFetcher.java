@@ -90,6 +90,8 @@ public class FlightInfoFetcher {
 			fl.setDAY_OF_MONTH(calendar.get(Calendar.MONTH)+1);
 			fl.setDAY_OF_WEEK((calendar.get(Calendar.DAY_OF_WEEK)-1));
 			fl.setDepDate(date);
+			fl.setArrivalDate(date);
+			System.out.println("@@@@@@@@@@@@@@@@@@ setdepdata "+fl.getDepDate());
 			fl.setArrivalAirport(arrivalCity);
 			fl.setDepartureAirport(departCity);
 			try {

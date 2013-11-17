@@ -7,10 +7,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
+import models.fetcher.TimeZoneFetcher;
 import models.fetcher.WeatherFetcher;
 import models.fetcher.YelpFetcher;
 
 public class FlightQuality{
+	protected TimeZone depTZ;
+	protected TimeZone arrTZ;
+	
 	protected String flightNumber;
 	private int DAY_OF_WEEK;
 	private int DAY_OF_MONTH;
@@ -54,12 +58,22 @@ public class FlightQuality{
 	public String getArrivalTime(){
 		return this.arrTime;
 	}
+	public TimeZone getArrTZ(){
+		return this.arrTZ;
+	}
+	public TimeZone getDepTZ(){
+		return this.depTZ;
+	}
 	public String getDepTime(){
 		return this.depTime;
 	}
 	
 	public String getArrivalDate(){
 		return this.arrivalDate;//.toGMTString();
+	}
+	//public void setArrTZ(TimeZone )
+	public void setArrivalDate(String date){
+		this.arrivalDate = date;
 	}
 	public String getAirline(){
 		return this.airline;
@@ -116,8 +130,14 @@ public class FlightQuality{
 		this.depDate = date;
 	}
 	public void fetchWeather(){
-		this.departWeather = WeatherFetcher.Fetch(this.departAirport.getGeoLocation().city,new SimpleDateFormat("yyyy-mm-dd").format( this.depDate));
-		this.arrivalWeather = WeatherFetcher.Fetch(this.arrivalAirport.getGeoLocation().city,new SimpleDateFormat("yyyy-mm-dd").format(  this.arrivalDate));
+		System.out.println("!!!!!!!"+this.depDate);
+		this.departWeather = WeatherFetcher.Fetch(this.departAirport.getGeoLocation(), this.depDate);
+		this.arrivalWeather = WeatherFetcher.Fetch(this.arrivalAirport.getGeoLocation(),this.arrivalDate);
+	}
+	public void fetchTimeZone(){
+		//System.out.println("!!!!!!!"+this.depDate);
+		this.depTZ = TimeZoneFetcher.fetch(this.departAirport.getGeoLocation());
+		this.arrTZ = TimeZoneFetcher.fetch(this.arrivalAirport.getGeoLocation());
 	}
 	/*public void fetchRecommendations(){
 

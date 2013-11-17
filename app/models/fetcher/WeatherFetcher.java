@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import models.Airport;
+import models.GeoLocation;
 import models.Weather;
 
 import org.apache.http.NameValuePair;
@@ -46,18 +47,87 @@ public class WeatherFetcher {
 	}
 
 	
+	public static  Weather Fetch(GeoLocation airport,String date) {
+		
+		//HashMap<String, Weather> dateWeather = new HashMap<String, Weather>();
+		HttpClient httpclient = new DefaultHttpClient();
+		try {
+			System.out.println("query date: ->>>"+date);
+			System.out.println("QUERY WEATHER:" + airport);
+			List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+			qparams.add(new BasicNameValuePair("q", airport.getLatitude()+","+airport.getLongitude()));
+			URIBuilder uri = new URIBuilder("http://api.worldweatheronline.com/premium/v1/weather.ashx");
+			uri.addParameter("q", airport.getLatitude()+","+airport.getLongitude());
+			uri.addParameter("format", "json");
+			//uri.addParameter("num_of_days", "5");
+			if(date.length()!=0)
+				uri.addParameter("date", date);
+				
+			//freeuri.addParameter("key", "xekxkssj32w832j6bkkxets7");
+			uri.addParameter("key", "n82qns68xdvdbs4g9a62tthv");
+//http://api.worldweatheronline.com/free/v1/weather.ashx?q=sunnyvale&format=json&num_of_days=5&key=xekxkssj32w832j6bkkxets7
+			HttpGet httpget = new HttpGet(uri.build());
+
+			System.out.println("executing request " + httpget.getURI());
+
+			// Create a response handler
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			String responseBody = httpclient.execute(httpget, responseHandler);
+			responseBody = httpclient.execute(httpget, responseHandler);
+			JSONObject myjson = new JSONObject(responseBody)
+					.getJSONObject("data");
+			//System.out.println("data >>>"+myjson.toString());
+			JSONObject current = myjson.getJSONArray("current_condition")
+					.getJSONObject(0);
+
+			//JSONArray forecasts = myjson.getJSONArray("weather");
+
+			Weather currentWeather = new Weather(new Date(),
+					current.getDouble("temp_F"),
+					current.getDouble("windspeedMiles"),
+					current.getInt("visibility"), current.getInt("pressure"),
+					current.getInt("weatherCode"), current
+							.getJSONArray("weatherDesc").getJSONObject(0)
+							.getString("value"), current
+							.getJSONArray("weatherIconUrl").getJSONObject(0)
+							.getString("value"));
+			//dateWeather.put(date,currentWeather);
+			
+			return currentWeather;
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// When HttpClient instance is no longer needed,
+			// shut down the connection manager to ensure
+			// immediate deallocation of all system resources
+			httpclient.getConnectionManager().shutdown();
+		}
+		return null;
+	}
+
 	public static  Weather Fetch(String airport,String date) {
 	
-			HashMap<String, Weather> dateWeather = new HashMap<String, Weather>();
+			//HashMap<String, Weather> dateWeather = new HashMap<String, Weather>();
 			HttpClient httpclient = new DefaultHttpClient();
 			try {
+				System.out.println("query date: ->>>"+date);
 				System.out.println("QUERY WEATHER:" + airport);
 				List<NameValuePair> qparams = new ArrayList<NameValuePair>();
 				qparams.add(new BasicNameValuePair("q", airport));
 				URIBuilder uri = new URIBuilder("http://api.worldweatheronline.com/premium/v1/weather.ashx");
 				uri.addParameter("q", airport);
 				uri.addParameter("format", "json");
-				uri.addParameter("num_of_days", "5");
+				//uri.addParameter("num_of_days", "5");
 				if(date.length()!=0)
 					uri.addParameter("date", date);
 					
@@ -71,12 +141,14 @@ public class WeatherFetcher {
 				// Create a response handler
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				String responseBody = httpclient.execute(httpget, responseHandler);
+				responseBody = httpclient.execute(httpget, responseHandler);
 				JSONObject myjson = new JSONObject(responseBody)
 						.getJSONObject("data");
+				//System.out.println("data >>>"+myjson.toString());
 				JSONObject current = myjson.getJSONArray("current_condition")
 						.getJSONObject(0);
 	
-				JSONArray forecasts = myjson.getJSONArray("weather");
+				//JSONArray forecasts = myjson.getJSONArray("weather");
 	
 				Weather currentWeather = new Weather(new Date(),
 						current.getDouble("temp_F"),
