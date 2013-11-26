@@ -105,12 +105,14 @@ public class Prediction {
 		FlightQuality quality = FlightInfoFetcher.fetch(flightID,strDate,dep);  
 		if(quality == null){
 			System.out.println("$$$$$$$$$$$$$$$$$4 "+flightID+" "+strDate);
-			//quality = new FlightQuality(airline, flightNumber, d, departure, arrival);
-		
+			quality = new FlightQuality(flightID.substring(0,2), flightID.substring(2), strDate, dep, "unknown arrival");
+			quality.setError(new Error(1,"no  matching flight found for "+flightID+" from "+dep));
+			return quality;
+			
 		}
 		
 		makePrediction2(quality);
-		quality.fetchWeather();
+		
 		//quality.fetchTimeZone();
 		
 		//quality.fetchRecommendations();
@@ -165,9 +167,11 @@ public class Prediction {
 		System.out.println("responseBody " + response);
 		
 		//fq.setDelay(Integer.parseInt(response)*15,11);*/
-		Error error = new Error(0,"everything good");
+		
+		
 		fq.setDelay(1*15, 0);
-		fq.setError(error);
+		fq.setError(new Error(0,"everything good"));
+		fq.fetchWeather();
 		return ;
 
 	}

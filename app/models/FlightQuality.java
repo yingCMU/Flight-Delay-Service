@@ -32,6 +32,9 @@ public class FlightQuality{
 	private String depDate;
 	private String arrTime;
 	private int quater=4;
+	public FlightQuality(){
+		
+	}
 	public FlightQuality(String airline, String flightNumber, String arrivalTime, String departureTime){
 		this.airline = airline;
 		this.flightNumber = flightNumber;
