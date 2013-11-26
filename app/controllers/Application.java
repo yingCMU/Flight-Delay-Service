@@ -89,7 +89,7 @@ public class Application extends Controller {
 	  if(!strDate.equals("")){
 		  d = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
 	  }
-	  return ok( new ObjectMapper().writeValueAsString(p.predict( flightID, strDate)) );
+	  return ok( new ObjectMapper().writeValueAsString(p.predict( flightID, strDate,origin)) );
   }
   /*
   public static Result flights(String airportCode) throws JsonGenerationException, JsonMappingException, IOException, ParseException{

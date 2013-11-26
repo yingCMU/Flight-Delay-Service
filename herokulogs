@@ -1,6 +1,9 @@
 Flight API
 1.since the API I am calling do not require “origin airport” as a request parameter, but you can include it and I will figure out how to deal with it
-http://localhost:9000/predictions/UA502/2013-12-01/SFO
+http://shielded-brook-9642.herokuapp.com/predictions/UA502/2013-12-01/SFO
+
+for some flightnumber, the result might be empty because the API I am using does not have that data.
+
 2. I removed depTZ and arrTZ
 3. I added an airlineName field like "United Airlines"
 
@@ -8,7 +11,7 @@ Recommendation API
 
 1. to search for some categories, you might need bigger range. (by the way , the radius parameter is in miles)
 You can try this , I added some filter so it gives better result
-http://localhost:9000/recommendations/-122.374889/37.618972/5/hotels/15
+http://shielded-brook-9642.herokuapp.com/recommendations/-122.374889/37.618972/5/hotels,restaurants/5
 
 
 2. I can only show phone: "+1-650-692-3500"

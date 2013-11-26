@@ -84,11 +84,11 @@ public class Prediction {
 		try {
 			Prediction p = new Prediction();
 			//p.predict("", "", new Date(), "SFO", "SEA");
-			String strDate="2013-11-02";
+			String strDate="2013-12-02";
 			Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(strDate);
 			//System.out.println(date);
 			//p.makePrediction2(date);
-			p.predict("AA1637", strDate);
+			p.predict("UA502", strDate,"SFO");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,8 +101,8 @@ public class Prediction {
 	public void buildModel(){
 		return;
 	}
-	public FlightQuality predict(String flightID,  String strDate){
-		FlightQuality quality = FlightInfoFetcher.fetch(flightID,strDate);  
+	public FlightQuality predict(String flightID,  String strDate,String dep){
+		FlightQuality quality = FlightInfoFetcher.fetch(flightID,strDate,dep);  
 		if(quality == null){
 			System.out.println("$$$$$$$$$$$$$$$$$4 "+flightID+" "+strDate);
 			//quality = new FlightQuality(airline, flightNumber, d, departure, arrival);
@@ -116,18 +116,9 @@ public class Prediction {
 		//quality.fetchRecommendations();
 		return quality;
 	}
-	protected int makePrediction(Date d){
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(d);
-		double p = 0;
-		p += delayMonth.get(calendar.get(Calendar.MONTH) + 1);
-		p += delayWeek.get(calendar.get(Calendar.DAY_OF_WEEK) - 1 );
-		p += delayDate.get(calendar.get(Calendar.DATE));
-		p += delayTime.get(calendar.get(Calendar.HOUR_OF_DAY)*10 + (calendar.get(Calendar.MINUTE)/30) * 5 );
-		return (int) (p/4);
-
-	}
+	
 	protected void makePrediction2(FlightQuality fq){
+		HANASQL hana = new HANASQL(fq);
 		/*
 		System.out.println(fq.toString());
 		
@@ -174,7 +165,8 @@ public class Prediction {
 		System.out.println("responseBody " + response);
 		
 		//fq.setDelay(Integer.parseInt(response)*15,11);*/
-		fq.setDelay(0, 0);
+		Error error = new Error(0,"everything good");
+		fq.setError(error);
 		return ;
 
 	}

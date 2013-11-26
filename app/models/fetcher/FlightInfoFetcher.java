@@ -37,12 +37,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class FlightInfoFetcher {
 	public static void main(String [ ] args) throws IOException, ParseException{
-		 FlightInfoFetcher.fetch("UA502","2013-12-1");
+		 FlightInfoFetcher.fetch("UA502","2013-12-01","SFO");
 	}
 	public FlightInfoFetcher() throws IOException{
 		
 	}
-	public static FlightQuality fetch(String flightID,String date){
+	public static FlightQuality fetch(String flightID,String date, String dep_para){
 		//AA/1673/departing/2013/11/17?=&appKey=&extendedOptions=useInlinedReferences
 		HttpClient httpclient = new DefaultHttpClient();
 		try {
@@ -67,59 +67,66 @@ public class FlightInfoFetcher {
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
 			//System.out.println(responseBody);
-			JSONObject schedule=  (JSONObject) new JSONObject(responseBody)
-					.getJSONArray("scheduledFlights").get(0);
-			System.out.println( schedule.toString());
-			int i=0;
-			JSONObject carrie = (JSONObject) schedule.getJSONObject("carrier");
-			JSONObject departureAirport =(JSONObject) schedule.getJSONObject("departureAirport");
-			JSONObject arrivalAirport = (JSONObject) schedule.getJSONObject("arrivalAirport");
-			System.out.println("acrrie:  -"+carrie.toString());
-			System.out.println("departureAirport:  -"+departureAirport.toString());
-			System.out.println("arrivalAirport:  -"+arrivalAirport.toString());
-			/*
-			 * departureTerminal: "3",
-arrivalTerminal: "7",
-departureTime: "2013-11-18T16:35:00.000",
-arrivalTime: "2013-11-19T00:54:00.000",
-			 */
-			String departureTime = schedule.getString("departureTime");
-			String arrivalTime = schedule.getString("arrivalTime");
-			System.out.println(departureTime+" ;"+arrivalTime);
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss.SSS");
-			/*JSONObject current = myjson.getJSONArray("time_zone").getJSONObject(0);
-			System.out.println("***********"+current.getString("localtime"));
-			*/
-			Date depDate = format.parse(departureTime);
-			Date arrivalDate = format.parse(arrivalTime);
-			//int depTZ = departureAirport.getInt("utcOffsetHours");
-			//int arrTZ = arrivalAirport.getInt("utcOffsetHours");
+			JSONArray schedules = new JSONObject(responseBody).getJSONArray("scheduledFlights");
+			for(int i=0;i<schedules.length();i++){
+				JSONObject schedule=  (JSONObject) schedules.get(0);
+				JSONObject departureAirport =(JSONObject) schedule.getJSONObject("departureAirport");
+				if(departureAirport.getString("iata").equals("SFO")){
+					JSONObject carrie = (JSONObject) schedule.getJSONObject("carrier");
+					
+					JSONObject arrivalAirport = (JSONObject) schedule.getJSONObject("arrivalAirport");
+					System.out.println("acrrie:  -"+carrie.toString());
+					System.out.println("departureAirport:  -"+departureAirport.toString());
+					System.out.println("arrivalAirport:  -"+arrivalAirport.toString());
+					/*
+					 * departureTerminal: "3",
+		arrivalTerminal: "7",
+		departureTime: "2013-11-18T16:35:00.000",
+		arrivalTime: "2013-11-19T00:54:00.000",
+					 */
+					String departureTime = schedule.getString("departureTime");
+					String arrivalTime = schedule.getString("arrivalTime");
+					System.out.println(departureTime+" ;"+arrivalTime);
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd'T'hh:mm:ss.SSS");
+					/*JSONObject current = myjson.getJSONArray("time_zone").getJSONObject(0);
+					System.out.println("***********"+current.getString("localtime"));
+					*/
+					Date depDate = format.parse(departureTime);
+					Date arrivalDate = format.parse(arrivalTime);
+					//int depTZ = departureAirport.getInt("utcOffsetHours");
+					//int arrTZ = arrivalAirport.getInt("utcOffsetHours");
+					
+					String dep = depDate.getHours()+""+depDate.getMinutes();
+					String arr = arrivalDate.getHours()+""+arrivalDate.getMinutes();
+					String departCity=departureAirport.getString("fs");
+					String arrivalCity= arrivalAirport.getString("fs");
+					String carrier_name = carrie.getString("name");
+					System.out.println(flightID+" "+departCity+" "+" "+arrivalCity+ 
+					" carrier_name "+carrier_name+" ;  time:"+dep+" "+arr);
+					
+					//System.out.println("aircraft");
+					FlightQuality fl=new FlightQuality(flightID, dep, arr);
+					fl.setDepartAirport(Airport.findAirport(departCity)) ;
+					//System.out.println("!!!!"+fl.getDepartAirport().getGeoLocation().getLatitude());
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(depDate);
+					
+					fl.setDAY_OF_MONTH(calendar.get(Calendar.MONTH)+1);
+					fl.setDAY_OF_WEEK((calendar.get(Calendar.DAY_OF_WEEK)-1));
+					fl.setDepDate(date);
+					fl.setAirlineName(carrier_name);
+					fl.setArrivalDate(arrivalTime.substring(0,10));
+					System.out.println("@@@@@@@@@@@@@@@@@@ setdepdata "+fl.getDepDate());
+					fl.setArrivalAirport(arrivalCity);
+					fl.setDepartureAirport(departCity);
+					System.out.println(fl.toString());
+					return fl;
+				}
+				
+			}
+			return null;
 			
-			String dep = depDate.getHours()+""+depDate.getMinutes();
-			String arr = arrivalDate.getHours()+""+arrivalDate.getMinutes();
-			String departCity=departureAirport.getString("fs");
-			String arrivalCity= arrivalAirport.getString("fs");
-			String carrier_name = carrie.getString("name");
-			System.out.println(flightID+" "+departCity+" "+" "+arrivalCity+ 
-			" carrier_name "+carrier_name+" ;  time:"+dep+" "+arr);
 			
-			//System.out.println("aircraft");
-			FlightQuality fl=new FlightQuality(flightID, dep, arr);
-			fl.setDepartAirport(Airport.findAirport(departCity)) ;
-			//System.out.println("!!!!"+fl.getDepartAirport().getGeoLocation().getLatitude());
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(depDate);
-			
-			fl.setDAY_OF_MONTH(calendar.get(Calendar.MONTH)+1);
-			fl.setDAY_OF_WEEK((calendar.get(Calendar.DAY_OF_WEEK)-1));
-			fl.setDepDate(date);
-			fl.setAirlineName(carrier_name);
-			fl.setArrivalDate(arrivalTime.substring(0,10));
-			System.out.println("@@@@@@@@@@@@@@@@@@ setdepdata "+fl.getDepDate());
-			fl.setArrivalAirport(arrivalCity);
-			fl.setDepartureAirport(departCity);
-			System.out.println(fl.toString());
-			return fl;
 		}catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

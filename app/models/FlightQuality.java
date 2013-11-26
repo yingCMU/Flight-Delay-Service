@@ -14,7 +14,7 @@ import models.fetcher.YelpFetcher;
 public class FlightQuality{
 	//protected TimeZone depTZ;
 	//protected TimeZone arrTZ;
-	
+	protected Error error;
 	protected String flightNumber;
 	private int DAY_OF_WEEK;
 	private int DAY_OF_MONTH;
@@ -185,5 +185,11 @@ public class FlightQuality{
 	}
 	public void setAirlineName(String airlineName) {
 		this.airlineName = airlineName;
+	}
+	public Error getError() {
+		return error;
+	}
+	public void setError(Error error) {
+		this.error = error;
 	}
 }

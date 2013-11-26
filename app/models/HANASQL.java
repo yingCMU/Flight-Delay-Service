@@ -24,7 +24,7 @@ public class HANASQL {
 	
 	//private String testingview;
 	private String trainingview;
-	String procP = "_SYS_AFL.PAL_PREDICTWITHDT_Y";
+	String procP = "_SYS_AFL.PAL_PREDICTWITHDT";
 	String procT = "_SYS_AFL.PAL_CREATEDT_Y";
 	String match = "SFO";
 	private String lowbondyear ="2000";
@@ -33,15 +33,16 @@ public class HANASQL {
 	
 	public static void main(String[] args){
 		HANASQL hana= new HANASQL();
-		hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8");
-		/*for(int month=6;month<=6;month++){
+		hana.classify(11);
+		/*hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8");
+		for(int month=6;month<=6;month++){
 		if(month==5) continue;
 		hana.i=month;
 		//
 		hana.classify(hana.i);
 		hana.statisticDevika(hana.i);
 	
-		}*/
+		}
 		//hana.train(11);
 	hana.classify(11);
 		try {
@@ -49,7 +50,7 @@ public class HANASQL {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 		System.out.println("----all done :P -----------");
 	}
 	
@@ -63,7 +64,7 @@ public class HANASQL {
 	 public HANASQL(){
 		 connectDB();
 			 
-		 
+		
 	 }
 	 
 	 public void train(int i){
@@ -120,17 +121,14 @@ public class HANASQL {
 			//testingtable="FLIGHT_"+i;
 			resulttable="RESULT_SFO_"+i;
 			
-			String json= "PAL_CDT_JSONMODEL_SFO_"+i;
+			String json= "PAL_CDT_JSONMODEL_TBL_11_SFO";
 			//hana.test();
+			testingtable="TESTINGTABLE";
 			drop(testingtable,"TABLE");
-			
-				testingtable="TESTINGTABLE_"+i;
-				createTestingView( testingtable, match);
-			
-				createControlP();
+			createTable(testingtable,"PAL_PCDT_DATA_Y");
 			createTable(resulttable,"PAL_PCDT_RESULT_T");
 			callProcP(procP, testingtable, resulttable,json);
-			result();
+			fq.setDelay(getResult(), 0);
 			System.out.println("--success-------prediction done----");
 	 }
 	 public void connectDB(){
@@ -138,8 +136,8 @@ public class HANASQL {
 				 try {
 				 Statement stmt;
 				 Class.forName("com.sap.db.jdbc.Driver");
-				 String url = "jdbc:sap://54.235.127.76:30015/SYSTEM";
-				 Connection con =DriverManager.getConnection( url,"SYSTEM", "Cmusv2012");
+				 String url = "jdbc:sap://grey.sv.cmu.edu:30015/SYSTEM";
+				 Connection con =DriverManager.getConnection( url,"SYSTEM", "cmuHANA0413");
 				 System.out.println("connecting established");
 				 System.out.println("Connection: " + con);
 				 this.con= con;
@@ -312,7 +310,95 @@ public class HANASQL {
 				}
 			 
 		 }
+	 public int getResult(){
+		 String st1= "set schema FLIGHT_DELAY";//+\"FLIGHT_DELAY\".\"\";"
+			//String st2= "DROP VIEW  "+view;
+					 		//"//+//PAL_PCDT_DATA_TBL;
+			String st2=	"select DEP_DELAY_GROUP  from "+resulttable;
+			 Statement stmt;
+			try {
+				stmt = con.createStatement();
+				ResultSet totalSet = stmt.executeQuery(st2);
+				totalSet.next();
+				int dep_delay = (totalSet.getInt("DEP_DELAY_GROUP"));
+				System.out.println("dep_delay "+dep_delay);
+				return dep_delay;
+				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				
+			}
+			return -100;
+			
+	 }
 	 public void result(){
+		
+
+		 // Set auto-commit to false
+		 try {
+			// Create statement object
+			 Statement stmt = con.createStatement();
+			con.setAutoCommit(false);
+			
+			//SQL = "DROP TYPE PAL_PCDT_DATA_Y";
+			//stmt.addBatch(SQL);
+			/*SQL = "CREATE TYPE PAL_PCDT_DATA_Y AS TABLE(\"ID\" INTEGER,"+
+ "\"DAY_OF_MONTH\" INT,\"DAY_OF_WEEK\" INT, \"QUARTER\" INT, \"MONTH\" INT,\"UNIQUE_CARRIER\" VARCHAR(50),"+
+ 
+ "\"ORIGIN\" VARCHAR(3), \"DEST\" VARCHAR(3), \"DEP_TIME\" INT  )";
+			
+			System.out.println(SQL); 
+			stmt.addBatch(SQL);
+			*/
+			 
+			// Create SQL statement
+			/*String SQL = "DROP  TABLE \"FLIGHT_DELAY\".\"TESTING_TABLE\"";
+			System.out.println(SQL); 
+			
+			stmt.addBatch(SQL);
+			stmt.executeBatch();
+
+			 //Explicitly commit statements to apply changes
+			 con.commit();
+			 stmt = con.createStatement();
+				con.setAutoCommit(false);*/
+			String SQL = "CREATE LOCAL TEMPORARY TABLE \"FLIGHT_DELAY\".\"TESTING_TABLE\" LIKE \"FLIGHT_DELAY\".\"PAL_PCDT_DATA_Y\"";
+			 // Add above SQL statement in the batch.
+			 System.out.println(SQL); 
+			 stmt.addBatch(SQL);
+
+			 // Create one more SQL statement
+			 SQL = "INSERT INTO \"FLIGHT_DELAY\".\"TESTING_TABLE\" VALUES  (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";
+			 System.out.println(SQL); 
+			 // Add above SQL statement in the batch.
+			 stmt.addBatch(SQL);
+
+			 // Create one more SQL statement
+			 SQL = "DROP TABLE \"FLIGHT_DELAY\".\"RESULT_SFO\"";
+				System.out.println(SQL);  
+				stmt.addBatch(SQL);
+			 SQL = "CREATE TABLE \"FLIGHT_DELAY\".\"RESULT_SFO\" LIKE \"FLIGHT_DELAY\".\"PAL_PCDT_RESULT_T\"";
+			 // Add above SQL statement in the batch.
+			 System.out.println(SQL); 
+			 stmt.addBatch(SQL);
+			 SQL = "CALL _SYS_AFL.PAL_PREDICTWITHDT(\"FLIGHT_DELAY\".\"TESTING_TABLE\", \"FLIGHT_DELAY\".\"PAL_CONTROL\", \"FLIGHT_DELAY\".\"PAL_CDT_JSONMODEL_TBL_11_SFO\", \"FLIGHT_DELAY\".\"RESULT_SFO\") with overview ";
+			 System.out.println(SQL); 
+			 stmt.addBatch(SQL);
+			 // Create an int[] to hold returned values
+			 int[] count = stmt.executeBatch();
+
+			 //Explicitly commit statements to apply changes
+			 con.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		 
+		 
+		 
+		 /*
 			String st1= "set schema FLIGHT_DELAY";//+\"FLIGHT_DELAY\".\"\";"
 				//String st2= "DROP VIEW  "+view;
 						 		//"//+//PAL_PCDT_DATA_TBL;
@@ -327,16 +413,16 @@ public class HANASQL {
 					int total = (totalSet.getInt("DEP_DELAY_GROUP"));
 					System.out.println("----------\n"+total);
 					fq.setDelay(total*15, -11);
-					/* while(resultSet.next()){
+					 while(resultSet.next()){
 					
 					 System.out.println(resultSet.getString("MONTH"));
 					 System.out.println(resultSet.getString("MATCHED"));
-					 ;*/
+					 ;
 					 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			 
 		 }
  public void createTrainingView(String view,String table, String match){
@@ -434,7 +520,7 @@ public class HANASQL {
 	  */
 	 public void callProcP(String proc,String testing,  String result,String json){
 		 String st1= "set schema FLIGHT_DELAY";
-		 String st= "CALL "+proc+"("+testing+", "+"\"PAL_CONTROL_TBL\","+json+","+ result+" ) with overview";
+		 String st= "CALL "+proc+"("+testing+", "+"\"PAL_CONTROL\","+json+","+ result+" ) with overview";
 		 
 		 System.out.println(st+"\npredicting..........");
 			Statement stmt;
@@ -492,6 +578,7 @@ public class HANASQL {
 		 
 		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
 		 String st1= " set schema FLIGHT_DELAY";
+		 String st3 = "INSERT INTO "+name+" VALUES  (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";
          	System.out.println(st2);
 			 
 			 Statement stmt;
@@ -502,6 +589,7 @@ public class HANASQL {
 				drop(name,"TABLE");
 				System.out.println(st2);
 				int resultSet = stmt.executeUpdate(st2);
+				stmt.executeUpdate(st3);
 				
 				/* while(resultSet.next()){
 				
