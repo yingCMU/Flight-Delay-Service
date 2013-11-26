@@ -1,21 +1,101 @@
-Flight API
-1.since the API I am calling do not require “origin airport” as a request parameter, but you can include it and I will figure out how to deal with it
-http://shielded-brook-9642.herokuapp.com/predictions/UA502/2013-12-01/SFO
-
-for some flightnumber, the result might be empty because the API I am using does not have that data.
-
-2. I removed depTZ and arrTZ
-3. I added an airlineName field like "United Airlines"
-
-Recommendation API
-
-1. to search for some categories, you might need bigger range. (by the way , the radius parameter is in miles)
-You can try this , I added some filter so it gives better result
-http://shielded-brook-9642.herokuapp.com/recommendations/-122.374889/37.618972/5/hotels,restaurants/5
-
-
-2. I can only show phone: "+1-650-692-3500"
-
-3. There is an excess field named “categories”. Why is this field empty in every recommendation? However, the “category” field is good. I’ll use this for a display in the app.
-
-Expected result: There should be no empty field.
+2013-11-26T00:04:10.587212+00:00 app[web.1]: 	at controllers.Application.predictions(Application.java:92) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:10.587212+00:00 app[web.1]: 	at models.HANASQL.<init>(HANASQL.java:60) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:10.587033+00:00 app[web.1]: 	at play.api.DefaultApplication.handleError(Application.scala:399) [com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:21.120668+00:00 heroku[router]: at=info method=GET path=/ host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=15ms status=200 bytes=6027
+2013-11-26T00:04:21.349253+00:00 heroku[router]: at=info method=GET path=/assets/stylesheets/style.css host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=67ms status=404 bytes=0
+2013-11-26T00:04:21.497615+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=8ms status=404 bytes=1910
+2013-11-26T00:04:21.276174+00:00 heroku[router]: at=info method=GET path=/assets/javascripts/jquery-1.8.3.min.js host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=12ms status=404 bytes=0
+2013-11-26T00:04:40.877487+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/502/departing/2013/12/01?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-11-26T00:04:41.627482+00:00 app[web.1]: acrrie:  -{"fs":"UA","iata":"UA","icao":"UAL","name":"United Airlines","phoneNumber":"1-800-864-8331","active":true}
+2013-11-26T00:04:41.627931+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-11-25T16:04:41.568","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
+2013-11-26T00:04:41.628343+00:00 app[web.1]: arrivalAirport:  -{"fs":"JFK","iata":"JFK","icao":"KJFK","faa":"JFK","name":"John F. Kennedy International Airport","street1":"JFK Airport","city":"New York","cityCode":"NYC","stateCode":"NY","postalCode":"11430","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"NYZ178","localTime":"2013-11-25T19:04:41.568","utcOffsetHours":-5,"latitude":40.642335,"longitude":-73.78817,"elevationFeet":13,"classification":1,"active":true}
+2013-11-26T00:04:41.630416+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-12-01
+2013-11-26T00:04:41.630699+00:00 app[web.1]: Date: 2013-12-01; Carrier : UA; Flight Number: 502's Service quality: 
+2013-11-26T00:04:41.630699+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-11-26T00:04:41.634687+00:00 app[web.1]: 	at java.sql.DriverManager.getConnection(DriverManager.java:571)
+2013-11-26T00:04:41.634540+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.generateDatabaseException(SQLExceptionSapDB.java:186)
+2013-11-26T00:04:41.634540+00:00 app[web.1]: 	at com.sap.db.jdbc.Driver.connect(Driver.java:239)
+2013-11-26T00:04:41.628526+00:00 app[web.1]: 2013-12-01T16:35:00.000 ;2013-12-02T00:54:00.000
+2013-11-26T00:04:41.629128+00:00 app[web.1]: UA502 SFO  JFK carrier_name United Airlines ;  time:1635 054
+2013-11-26T00:04:41.634969+00:00 app[web.1]: 	at models.HANASQL.connectDB(HANASQL.java:140)
+2013-11-26T00:04:41.630699+00:00 app[web.1]: connecting....
+2013-11-26T00:04:41.633944+00:00 app[web.1]: com.sap.db.jdbc.exceptions.JDBCDriverException: SAP DBTech JDBC: Cannot connect to jdbc:sap://grey.sv.cmu.edu:30015/SYSTEM [Unknown host grey.sv.cmu.edu:30015 [grey.sv.cmu.edu], -709.].
+2013-11-26T00:04:41.630699+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-11-26T00:04:41.634328+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.createException(SQLExceptionSapDB.java:219)
+2013-11-26T00:04:41.634432+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.createException(SQLExceptionSapDB.java:203)
+2013-11-26T00:04:41.635094+00:00 app[web.1]: 	at models.HANASQL.<init>(HANASQL.java:58)
+2013-11-26T00:04:41.635475+00:00 app[web.1]: 	at controllers.Application.predictions(Application.java:92)
+2013-11-26T00:04:41.635277+00:00 app[web.1]: 	at models.Prediction.makePrediction2(Prediction.java:121)
+2013-11-26T00:04:41.635413+00:00 app[web.1]: 	at models.Prediction.predict(Prediction.java:112)
+2013-11-26T00:04:41.635585+00:00 app[web.1]: 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:89)
+2013-11-26T00:04:41.635827+00:00 app[web.1]: 	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377)
+2013-11-26T00:04:41.635877+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56)
+2013-11-26T00:04:41.635653+00:00 app[web.1]: 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:89)
+2013-11-26T00:04:41.634828+00:00 app[web.1]: 	at java.sql.DriverManager.getConnection(DriverManager.java:215)
+2013-11-26T00:04:41.636197+00:00 app[web.1]: 	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:278)
+2013-11-26T00:04:41.636260+00:00 app[web.1]: 	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:274)
+2013-11-26T00:04:41.636827+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+2013-11-26T00:04:41.636931+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+2013-11-26T00:04:41.635928+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91)
+2013-11-26T00:04:41.635979+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90)
+2013-11-26T00:04:41.636062+00:00 app[web.1]: 	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+2013-11-26T00:04:41.636062+00:00 app[web.1]: 	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+2013-11-26T00:04:41.635771+00:00 app[web.1]: 	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183)
+2013-11-26T00:04:41.637101+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2013-11-26T00:04:41.637906+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.createException(SQLExceptionSapDB.java:219)
+2013-11-26T00:04:41.638340+00:00 app[web.1]: 	at java.sql.DriverManager.getConnection(DriverManager.java:571)
+2013-11-26T00:04:41.636348+00:00 app[web.1]: 	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29)
+2013-11-26T00:04:41.636406+00:00 app[web.1]: 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37)
+2013-11-26T00:04:41.636437+00:00 app[web.1]: 	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42)
+2013-11-26T00:04:41.636589+00:00 app[web.1]: 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386)
+2013-11-26T00:04:41.638970+00:00 app[web.1]: 	at controllers.Application.predictions(Application.java:92)
+2013-11-26T00:04:41.639066+00:00 app[web.1]: 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:89)
+2013-11-26T00:04:41.637177+00:00 app[web.1]: connecting....
+2013-11-26T00:04:41.636991+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+2013-11-26T00:04:41.637774+00:00 app[web.1]: com.sap.db.jdbc.exceptions.JDBCDriverException: SAP DBTech JDBC: Cannot connect to jdbc:sap://grey.sv.cmu.edu:30015/SYSTEM [Unknown host grey.sv.cmu.edu:30015 [grey.sv.cmu.edu], -709.].
+2013-11-26T00:04:41.638157+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.generateDatabaseException(SQLExceptionSapDB.java:186)
+2013-11-26T00:04:41.638478+00:00 app[web.1]: 	at models.HANASQL.connectDB(HANASQL.java:140)
+2013-11-26T00:04:41.638255+00:00 app[web.1]: 	at com.sap.db.jdbc.Driver.connect(Driver.java:239)
+2013-11-26T00:04:41.638061+00:00 app[web.1]: 	at com.sap.db.jdbc.exceptions.SQLExceptionSapDB.createException(SQLExceptionSapDB.java:203)
+2013-11-26T00:04:41.638478+00:00 app[web.1]: 	at java.sql.DriverManager.getConnection(DriverManager.java:215)
+2013-11-26T00:04:41.639189+00:00 app[web.1]: 	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:89)
+2013-11-26T00:04:41.639260+00:00 app[web.1]: 	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183)
+2013-11-26T00:04:41.639583+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90)
+2013-11-26T00:04:41.639686+00:00 app[web.1]: 	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+2013-11-26T00:04:41.638669+00:00 app[web.1]: 	at models.HANASQL.<init>(HANASQL.java:60)
+2013-11-26T00:04:41.638821+00:00 app[web.1]: 	at models.Prediction.makePrediction2(Prediction.java:121)
+2013-11-26T00:04:41.638821+00:00 app[web.1]: 	at models.Prediction.predict(Prediction.java:112)
+2013-11-26T00:04:41.638669+00:00 app[web.1]: 	at models.HANASQL.classify(HANASQL.java:120)
+2013-11-26T00:04:41.639900+00:00 app[web.1]: 	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:274)
+2013-11-26T00:04:41.639369+00:00 app[web.1]: 	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377)
+2013-11-26T00:04:41.640078+00:00 app[web.1]: 	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37)
+2013-11-26T00:04:41.640243+00:00 app[web.1]: 	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386)
+2013-11-26T00:04:41.640390+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+2013-11-26T00:04:41.639428+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56)
+2013-11-26T00:04:41.639840+00:00 app[web.1]: 	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:278)
+2013-11-26T00:04:41.639525+00:00 app[web.1]: 	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91)
+2013-11-26T00:04:41.640427+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+2013-11-26T00:04:41.639686+00:00 app[web.1]: 	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+2013-11-26T00:04:41.640019+00:00 app[web.1]: 	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29)
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 	at play.api.Application$class.handleError(Application.scala:293) ~[com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: [[31merror[0m] application - 
+2013-11-26T00:04:41.643452+00:00 app[web.1]: Caused by: java.lang.NullPointerException: null
+2013-11-26T00:04:41.643280+00:00 app[web.1]: play.api.Application$$anon$1: Execution exception[[NullPointerException: null]]
+2013-11-26T00:04:41.640171+00:00 app[web.1]: 	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42)
+2013-11-26T00:04:41.640629+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2013-11-26T00:04:41.643280+00:00 app[web.1]: ! @6gcki51fo - Internal server error, for (GET) [/predictions/UA502/2013-12-01/SFO] ->
+2013-11-26T00:04:41.640521+00:00 app[web.1]: 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at models.HANASQL.drop(HANASQL.java:181) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 	at play.api.DefaultApplication.handleError(Application.scala:399) [com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2.applyOrElse(PlayDefaultUpstreamHandler.scala:261) [com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 	at scala.Option.map(Option.scala:145) [org.scala-lang.scala-library-2.10.2.jar:na]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 
+2013-11-26T00:04:41.641124+00:00 app[web.1]: [[31merror[0m] play - Cannot invoke the action, eventually got an error: java.lang.NullPointerException
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at controllers.Application.predictions(Application.java:92) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at models.HANASQL.<init>(HANASQL.java:60) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:41.643280+00:00 app[web.1]: 	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$2$$anonfun$applyOrElse$3.apply(PlayDefaultUpstreamHandler.scala:261) [com.typesafe.play.play_2.10-2.2.0.jar:2.2.0]
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at models.HANASQL.classify(HANASQL.java:127) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at models.Prediction.makePrediction2(Prediction.java:121) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]
+2013-11-26T00:04:41.643452+00:00 app[web.1]: 	at models.Prediction.predict(Prediction.java:112) ~[y.y-1.0-SNAPSHOT.jar:1.0-SNAPSHOT]

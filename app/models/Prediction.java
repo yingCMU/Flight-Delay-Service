@@ -118,7 +118,7 @@ public class Prediction {
 	}
 	
 	protected void makePrediction2(FlightQuality fq){
-		HANASQL hana = new HANASQL(fq);
+		//HANASQL hana = new HANASQL(fq);
 		/*
 		System.out.println(fq.toString());
 		
@@ -166,6 +166,7 @@ public class Prediction {
 		
 		//fq.setDelay(Integer.parseInt(response)*15,11);*/
 		Error error = new Error(0,"everything good");
+		fq.setDelay(1*15, 0);
 		fq.setError(error);
 		return ;
 
