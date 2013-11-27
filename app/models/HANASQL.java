@@ -1,6 +1,11 @@
 package models;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import models.fetcher.FlightInfoFetcher;
@@ -10,7 +15,7 @@ public class HANASQL {
 	
 	static Connection con = null;
 	//-----------------------change for your needs------------------
-	private int i;// month
+	
 	private String statistable="DELAY_STATISTICS_10_YEARS";//name of your evaluation table
 	private String fields="DAY_OF_MONTH,DAY_OF_WEEK, QUARTER, UNIQUE_CARRIER,"+
 	 		"ORIGIN, DEST, CRS_DEP_TIME";//no comma at start and end
@@ -25,15 +30,23 @@ public class HANASQL {
 	//private String testingview;
 	private String trainingview;
 	String procP = "_SYS_AFL.PAL_PREDICTWITHDT";
+	String procP_w = "_SYS_AFL.PAL_PREDICTWITHDT_W";
 	String procT = "_SYS_AFL.PAL_CREATEDT_Y";
 	String match = "SFO";
 	private String lowbondyear ="2000";
 	FlightQuality fq;
+	private int day;
+	private String date;
+	private int month;
+	private int quater;
+
+	private String testing_type="PAL_PCDT_DATA_Y";
+	private String testing_type_w="PAL_PCDT_DATA_Y";
 	
 	
 	public static void main(String[] args){
 		HANASQL hana= new HANASQL();
-		hana.classify(11);
+		hana.classify();
 		/*hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8");
 		for(int month=6;month<=6;month++){
 		if(month==5) continue;
@@ -57,7 +70,7 @@ public class HANASQL {
 	 public HANASQL(FlightQuality fq){
 		 connectDB();
 		 this.fq = fq;	
-		 classify(11);
+		 classify();
 		// result();
 		 
 	 }
@@ -115,22 +128,40 @@ public class HANASQL {
 			}
 			
 	}
-	public void classify(int i){
+	public void classify(){
 			if(con==null)
 				connectDB();
+			features(fq.getDepDate());
 			//testingtable="FLIGHT_"+i;
-			resulttable="RESULT_SFO_"+i;
+			resulttable="RESULT_SFO_"+month;
 			
-			String json= "PAL_CDT_JSONMODEL_TBL_11_SFO";
+			String json= "PAL_CDT_JSONMODEL_TBL_"+month+"_"+fq.departAirport.iataCode;
 			//hana.test();
 			testingtable="TESTINGTABLE";
 			drop(testingtable,"TABLE");
-			createTable(testingtable,"PAL_PCDT_DATA_Y");
+			createTestingTable(testingtable,testing_type);
 			createTable(resulttable,"PAL_PCDT_RESULT_T");
 			callProcP(procP, testingtable, resulttable,json);
 			fq.setDelay(getResult(), 0);
 			System.out.println("--success-------prediction done----");
 	 }
+	
+	public void classify_w(){
+		if(con==null)
+			connectDB();
+		//testingtable="FLIGHT_"+i;
+		resulttable="RESULT_SFO_"+month;
+		
+		String json= "PAL_DT_T_MODEL_TBL_W_"+month+"_"+fq.departAirport.iataCode;
+		//hana.test();
+		testingtable="TESTINGTABLE";
+		drop(testingtable,"TABLE");
+		createTestingTable(testingtable,testing_type_w);
+		createTable(resulttable,"PAL_PCDT_RESULT_T");
+		callProcP(procP_w, testingtable, resulttable,json);
+		fq.setDelay(getResult(), 0);
+		System.out.println("--success-------prediction done----");
+ }
 	 public void connectDB(){
 		 System.out.println("connecting....");
 				 try {
@@ -578,9 +609,94 @@ public class HANASQL {
 		 
 		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
 		 String st1= " set schema FLIGHT_DELAY";
-		 String st3 = "INSERT INTO "+name+" VALUES  (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";
-         	System.out.println(st2);
+		 	System.out.println(st2);
 			 
+			 Statement stmt;
+			try {
+				stmt = con.createStatement();
+				stmt.executeUpdate(st1);
+				//existable(name);
+				drop(name,"TABLE");
+				System.out.println(st2);
+				int resultSet = stmt.executeUpdate(st2);
+				
+				/* while(resultSet.next()){
+				
+				 System.out.println(resultSet.getString("MONTH"));
+				 System.out.println(resultSet.getString("MATCHED"));
+				 System.out.println("----------");*/
+				 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+	 }
+	 public void features(String strDate){
+		 try {
+				//strDate ="2013-11-24";
+				DateFormat inputDF  = new SimpleDateFormat("yyyy-mm-dd");
+				Date date1 = inputDF.parse(strDate);
+
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(date1);
+				month =Integer.parseInt(strDate.split("-")[1]);
+				date = strDate.split("-")[2];
+				day = cal.get(Calendar.DAY_OF_WEEK)+2;
+				if(month>=1 && month <=3)
+					quater = 1;
+				else if (month >=4 && month <=6)
+					quater = 2;
+				else if(month >=7 && month <=9)
+					quater = 3;
+				else
+					quater = 4;
+				//int year = cal.get(Calendar.YEAR);
+
+				System.out.println(month+" -day: "+day+" - date :"+date);
+				//Prints 8 - 30 - 2011 (because months are zero-based; demo)
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	 }
+	 public void createTestingTable(String name,String type){
+		 
+		 String st3 = "INSERT INTO "+name+" VALUES  (1, "+month+", "+day+", "+quater+", '"+fq.airline+"', '"+fq.departAirport.iataCode+"', '"+fq.arrivalAirport.iataCode+"', 1830)";
+	     System.out.println("!!!!!!!! "+st3);
+		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
+		 String st1= " set schema FLIGHT_DELAY";
+		// String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";	
+		 
+			 Statement stmt;
+			try {
+				stmt = con.createStatement();
+				stmt.executeUpdate(st1);
+				//existable(name);
+				drop(name,"TABLE");
+				System.out.println(st2);
+				int resultSet = stmt.executeUpdate(st2);
+				stmt.executeUpdate(st3);
+				
+				/* while(resultSet.next()){
+				
+				 System.out.println(resultSet.getString("MONTH"));
+				 System.out.println(resultSet.getString("MATCHED"));
+				 System.out.println("----------");*/
+				 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+	 }
+public void createTestingTable_w(String name,String type){
+		 
+		 String st3 = "INSERT INTO "+name+" VALUES  (1, "+month+", "+day+", "+quater+", '"+fq.airline+"', '"+fq.departAirport.iataCode+"', '"+fq.arrivalAirport.iataCode+"', 1830)";
+	     System.out.println("!!!!!!!! "+st3);
+		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
+		 String st1= " set schema FLIGHT_DELAY";
+		// String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";	
+		 
 			 Statement stmt;
 			try {
 				stmt = con.createStatement();

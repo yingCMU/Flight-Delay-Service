@@ -71,7 +71,7 @@ public class FlightInfoFetcher {
 			for(int i=0;i<schedules.length();i++){
 				JSONObject schedule=  (JSONObject) schedules.get(0);
 				JSONObject departureAirport =(JSONObject) schedule.getJSONObject("departureAirport");
-				if(departureAirport.getString("iata").equals("SFO")){
+				if(departureAirport.getString("iata").equals(dep_para)){
 					JSONObject carrie = (JSONObject) schedule.getJSONObject("carrier");
 					
 					JSONObject arrivalAirport = (JSONObject) schedule.getJSONObject("arrivalAirport");
@@ -119,7 +119,7 @@ public class FlightInfoFetcher {
 					System.out.println("@@@@@@@@@@@@@@@@@@ setdepdata "+fl.getDepDate());
 					fl.setArrivalAirport(arrivalCity);
 					fl.setDepartureAirport(departCity);
-					System.out.println(fl.toString());
+					System.out.println("end of flgitinfofetcher : "+fl.toString());
 					return fl;
 				}
 				

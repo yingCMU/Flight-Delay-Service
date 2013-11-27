@@ -83,14 +83,14 @@ public class WeatherFetcher {
 			//JSONArray forecasts = myjson.getJSONArray("weather");
 
 			Weather currentWeather = new Weather(new Date(),
-					current.getDouble("temp_F"),
+					current.getDouble("temp_C"),
 					current.getDouble("windspeedMiles"),
 					current.getInt("visibility"), current.getInt("pressure"),
 					current.getInt("weatherCode"), current
 							.getJSONArray("weatherDesc").getJSONObject(0)
 							.getString("value"), current
 							.getJSONArray("weatherIconUrl").getJSONObject(0)
-							.getString("value"));
+							.getString("value"),current.getInt("humidity"));
 			//dateWeather.put(date,currentWeather);
 			
 			return currentWeather;
@@ -158,7 +158,7 @@ public class WeatherFetcher {
 								.getJSONArray("weatherDesc").getJSONObject(0)
 								.getString("value"), current
 								.getJSONArray("weatherIconUrl").getJSONObject(0)
-								.getString("value"));
+								.getString("value"),current.getInt("humidity"));
 				//dateWeather.put(date,currentWeather);
 				
 				return currentWeather;

@@ -18,6 +18,7 @@ class Weather extends JsonDeserializer<Weather>{
 	double temp; // in F
 	double windspeed; // in miles
 	int code;
+	int humidity;
 	String description;
 	String icon;
 	int visibility;
@@ -26,7 +27,7 @@ class Weather extends JsonDeserializer<Weather>{
 	public Weather(){
 		
 	}
-	public Weather(Date date, double temp, double windspeed, int visibility, int pressure, int code,String description, String icon){
+	public Weather(Date date, double temp, double windspeed, int visibility, int pressure, int code,String description, String icon,int humidity){
 		this.date = date;
 		this.temp = temp;
 		this.windspeed = windspeed;
@@ -35,9 +36,10 @@ class Weather extends JsonDeserializer<Weather>{
 		this.icon = icon;
 		this.visibility = visibility;
 		this.pressure = pressure;
+		this.humidity = humidity;
 	}
-	public Weather(Date date, double temp, double windspeed, int code, String description, String icon){
-		this(date, temp, windspeed, -1, -1, code, description, icon);
+	public Weather(Date date, double temp, double windspeed, int code, String description, String icon,int humidity){
+		this(date, temp, windspeed, -1, -1, code, description, icon,humidity);
 	}
 	public void setDate(Date date){
 		this.date = date;
@@ -65,6 +67,9 @@ class Weather extends JsonDeserializer<Weather>{
 	}
 	public double getWindSpeed(){
 		return this.windspeed;
+	}
+	public int getHumidity(){
+		return this.humidity;
 	}
 	public int getWeatherCode(){
 		return this.code;
