@@ -120,7 +120,7 @@ public class Prediction {
 	}
 	
 	protected void makePrediction2(FlightQuality fq){
-		HANASQL hana = new HANASQL(fq);
+		//HANASQL hana = new HANASQL(fq);
 		/*
 		System.out.println(fq.toString());
 		

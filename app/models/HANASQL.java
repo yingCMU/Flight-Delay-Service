@@ -167,7 +167,7 @@ public class HANASQL {
 				 try {
 				 Statement stmt;
 				 Class.forName("com.sap.db.jdbc.Driver");
-				 String url = "jdbc:sap://grey.sv.cmu.edu:30015/SYSTEM";
+				 String url = "jdbc:sap://209.129.244.187:30015/SYSTEM";
 				 Connection con =DriverManager.getConnection( url,"SYSTEM", "cmuHANA0413");
 				 System.out.println("connecting established");
 				 System.out.println("Connection: " + con);
