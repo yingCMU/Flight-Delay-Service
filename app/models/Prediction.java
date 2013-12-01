@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 
 import org.apache.http.auth.AuthScope;
@@ -101,12 +102,29 @@ public class Prediction {
 	public void buildModel(){
 		return;
 	}
+	public boolean supportAirport(String query){
+		HashSet<String> support = new HashSet<String>();
+		String a = "SFO,JFK,ORD,PIT,SJC,LAX";
+		for(String port :a.split(",")){
+			support.add(port);
+			//System.out.println(a);
+		}
+		
+		return support.contains(query);
+		
+	}
 	public FlightQuality predict(String flightID,  String strDate,String dep){
+		if(!supportAirport(dep)){
+			FlightQuality quality = new FlightQuality(flightID.substring(0,2), flightID.substring(2), strDate, dep, "unknown arrival");
+			quality.setError(new Error(1,"no support for airport --"+dep));
+			return quality;
+		}
+			
 		FlightQuality quality = FlightInfoFetcher.fetch(flightID,strDate,dep);  
 		if(quality == null){
 			System.out.println("$$$$$$$$$$$$$$$$$4 "+flightID+" "+strDate);
 			quality = new FlightQuality(flightID.substring(0,2), flightID.substring(2), strDate, dep, "unknown arrival");
-			quality.setError(new Error(1,"no  matching flight found for "+flightID+" from "+dep));
+			quality.setError(new Error(1,"can not find flight  for "+flightID+" from "+dep+" on "+strDate));
 			return quality;
 			
 		}
@@ -120,7 +138,7 @@ public class Prediction {
 	}
 	
 	protected void makePrediction2(FlightQuality fq){
-		//HANASQL hana = new HANASQL(fq);
+		HANASQL hana = new HANASQL(fq);
 		/*
 		System.out.println(fq.toString());
 		
@@ -169,7 +187,9 @@ public class Prediction {
 		//fq.setDelay(Integer.parseInt(response)*15,11);*/
 		
 		
-		fq.setDelay(1*15, 0);
+		//fq.setDelay(1*15, 0);
+		/*int rd =  (int) ((int)5*Math.random());
+		fq.setDelay(rd*15, 0);*/
 		fq.setError(new Error(0,"everything good"));
 		fq.fetchWeather();
 		return ;

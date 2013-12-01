@@ -26,7 +26,8 @@ public class FeaturesTest {
 			DateFormat inputDF  = new SimpleDateFormat("yyyy-mm-dd");
 			
 			Date date1 = inputDF.parse(strDate);
-			
+			Date date2 = inputDF.parse("2013-12-31");
+			System.out.println("offeset: "+(date1.getTime()-date2.getTime()));
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date1);
 			String month = strDate.split("-")[1];

@@ -30,7 +30,7 @@ public class HANASQL {
 	//private String testingview;
 	private String trainingview;
 	String procP = "_SYS_AFL.PAL_PREDICTWITHDT";
-	String procP_w = "_SYS_AFL.PAL_PREDICTWITHDT_W";
+	String procP_w = "_SYS_AFL.PAL_PREDICTWITHDT_WEATHER";
 	String procT = "_SYS_AFL.PAL_CREATEDT_Y";
 	String match = "SFO";
 	private String lowbondyear ="2000";
@@ -40,13 +40,14 @@ public class HANASQL {
 	private int month;
 	private int quater;
 
-	private String testing_type="PAL_PCDT_DATA_Y";
-	private String testing_type_w="PAL_PCDT_DATA_Y";
+	private String testing_type="PAL_PCDT_DATA_T_Y";
+	private String testing_type_w="PAL_PCDT_DATA_W";
 	
 	
 	public static void main(String[] args){
 		HANASQL hana= new HANASQL();
-		hana.classify();
+		hana.classify_w();
+		//hana.classify();
 		/*hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8");
 		for(int month=6;month<=6;month++){
 		if(month==5) continue;
@@ -69,8 +70,25 @@ public class HANASQL {
 	
 	 public HANASQL(FlightQuality fq){
 		 connectDB();
-		 this.fq = fq;	
-		 classify();
+		 
+		try {
+			this.fq = fq;
+			 Date today = new Date();
+			 String depDateStr = fq.getDepDate();
+			 DateFormat inputDF  = new SimpleDateFormat("yyyy-mm-dd");
+			
+			 Date depDate;
+			depDate = inputDF.parse(depDateStr);
+			classify();
+			/*if(depDate.getTime()-today.getTime() <= 10*86400000)
+				 classify();
+			else 
+				classify_w();*/
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 		// result();
 		 
 	 }
@@ -131,6 +149,7 @@ public class HANASQL {
 	public void classify(){
 			if(con==null)
 				connectDB();
+			System.out.println("!!!!!!!!!!!!!Predicting without weather");
 			features(fq.getDepDate());
 			//testingtable="FLIGHT_"+i;
 			resulttable="RESULT_SFO_"+month;
@@ -142,21 +161,22 @@ public class HANASQL {
 			createTestingTable(testingtable,testing_type);
 			createTable(resulttable,"PAL_PCDT_RESULT_T");
 			callProcP(procP, testingtable, resulttable,json);
-			fq.setDelay(getResult(), 0);
+			fq.setDelay(getResult()*15, 0);
 			System.out.println("--success-------prediction done----");
 	 }
 	
 	public void classify_w(){
 		if(con==null)
 			connectDB();
+		System.out.println("Predicting with weather");
 		//testingtable="FLIGHT_"+i;
 		resulttable="RESULT_SFO_"+month;
-		
-		String json= "PAL_DT_T_MODEL_TBL_W_"+month+"_"+fq.departAirport.iataCode;
+		String json = "PAL_DT_T_MODEL_JSON_TBL_WEATHER_12_JFK";
+		//String json= "PAL_DT_T_MODEL_TBL_TBL_WEATHER_"+month+"_"+fq.departAirport.iataCode;
 		//hana.test();
-		testingtable="TESTINGTABLE";
+		testingtable="TESTINGTABLE_W";
 		drop(testingtable,"TABLE");
-		createTestingTable(testingtable,testing_type_w);
+		createTestingTable_w(testingtable,testing_type_w);
 		createTable(resulttable,"PAL_PCDT_RESULT_T");
 		callProcP(procP_w, testingtable, resulttable,json);
 		fq.setDelay(getResult(), 0);
@@ -690,9 +710,12 @@ public class HANASQL {
 			}
 	 }
 public void createTestingTable_w(String name,String type){
-		 
-		 String st3 = "INSERT INTO "+name+" VALUES  (1, "+month+", "+day+", "+quater+", '"+fq.airline+"', '"+fq.departAirport.iataCode+"', '"+fq.arrivalAirport.iataCode+"', 1830)";
-	     System.out.println("!!!!!!!! "+st3);
+		 String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'JFK', 'SFO', 10, 0, 0, 50, 8, 1)";
+		 //String st3 = "INSERT INTO "+name+" VALUES  (1, "+month+", "+day+", "+quater+", '"+fq.airline+"', '"+fq.departAirport.iataCode+"', '"+fq.arrivalAirport.iataCode+"', 1830)";
+	     
+	     /*fq.departWeather.humidity
+	      * 
+	      */
 		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
 		 String st1= " set schema FLIGHT_DELAY";
 		// String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";	
@@ -705,6 +728,7 @@ public void createTestingTable_w(String name,String type){
 				drop(name,"TABLE");
 				System.out.println(st2);
 				int resultSet = stmt.executeUpdate(st2);
+				System.out.println("!!!!!!!! "+st3);
 				stmt.executeUpdate(st3);
 				
 				/* while(resultSet.next()){
