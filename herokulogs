@@ -1,101 +1,101 @@
-2013-11-28T03:01:36.391257+00:00 app[web.1]: term is shopping
-2013-11-28T03:01:36.893954+00:00 heroku[router]: at=info method=GET path=/recommendations/-122.374889/37.618972/10/hotels,transport,restaurants,food,hotdogs,shopping/3 host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=12ms service=3114ms status=200 bytes=9966
-2013-11-28T04:04:21.633452+00:00 heroku[web.1]: Idling
-2013-11-28T04:04:21.634372+00:00 heroku[web.1]: State changed from up to down
-2013-11-28T04:04:24.349000+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2013-11-28T04:04:26.783753+00:00 heroku[web.1]: Process exited with status 143
-2013-11-28T07:19:53.476625+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/y -Dhttp.port=${PORT}`
-2013-11-28T07:19:54.561066+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS:  -Djava.rmi.server.useCodebaseOnly=true
-2013-11-28T07:19:55.398859+00:00 app[web.1]: Play server process ID is 2
-2013-11-28T07:19:57.622525+00:00 app[web.1]: [[37minfo[0m] play - Application started (Prod)
-2013-11-28T07:19:57.955455+00:00 app[web.1]: [[37minfo[0m] play - Listening for HTTP on /0:0:0:0:0:0:0:0:38873
-2013-11-28T07:19:58.522924+00:00 heroku[web.1]: State changed from starting to up
-2013-11-28T07:20:01.722976+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/US/6580/departing/2013/11/28?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
-2013-11-28T07:20:03.488220+00:00 app[web.1]: acrrie:  -{"fs":"US","iata":"US","icao":"AWE","name":"US Airways","phoneNumber":"1-800-943-5436","active":true}
-2013-11-28T07:20:03.489090+00:00 app[web.1]: arrivalAirport:  -{"fs":"IAD","iata":"IAD","icao":"KIAD","faa":"IAD","name":"Washington Dulles International Airport","street1":"1 Aviation Circle","city":"Washington","cityCode":"WAS","stateCode":"DC","postalCode":"20001-6000","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"DCZ001","localTime":"2013-11-28T02:20:03.387","utcOffsetHours":-5,"latitude":38.95315,"longitude":-77.447735,"elevationFeet":313,"classification":1,"active":true}
-2013-11-28T07:20:03.488665+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-11-27T23:20:03.387","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
-2013-11-28T07:20:03.490107+00:00 app[web.1]: US6580 SFO  IAD carrier_name US Airways ;  time:1310 2110
-2013-11-28T07:20:03.489285+00:00 app[web.1]: 2013-11-28T13:10:00.000 ;2013-11-28T21:10:00.000
-2013-11-28T07:20:03.884635+00:00 app[web.1]: Delay on departure in 0 minutes
-2013-11-28T07:20:03.884848+00:00 app[web.1]: !!!!!!!2013-11-28
-2013-11-28T07:20:03.884635+00:00 app[web.1]: Delay on Arrival in 0 minutes.
-2013-11-28T07:20:03.881077+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-11-28
-2013-11-28T07:20:03.884635+00:00 app[web.1]: end of flgitinfofetcher : Date: 2013-11-28; Carrier : US; Flight Number: 6580's Service quality: 
-2013-11-28T07:20:03.886885+00:00 app[web.1]: query date: ->>>2013-11-28
-2013-11-28T07:20:03.887730+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=37.618972%2C-122.374889&format=json&date=2013-11-28&key=n82qns68xdvdbs4g9a62tthv
-2013-11-28T07:20:03.887039+00:00 app[web.1]: QUERY WEATHER:San Francisco-(lat: 37.618972, lng:-122.374889)
-2013-11-28T07:20:04.478849+00:00 app[web.1]: QUERY WEATHER:Washington-(lat: 38.944533, lng:-77.455811)
-2013-11-28T07:20:04.479563+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=38.944533%2C-77.455811&format=json&date=2013-11-28&key=n82qns68xdvdbs4g9a62tthv
-2013-11-28T07:20:04.478849+00:00 app[web.1]: query date: ->>>2013-11-28
-2013-11-28T07:20:05.080657+00:00 heroku[router]: at=info method=GET path=/predictions/US6580/2013-11-28/SFO host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=1ms service=4332ms status=200 bytes=1720
-2013-11-28T07:19:44.696971+00:00 heroku[web.1]: State changed from down to starting
-2013-11-28T07:19:44.696971+00:00 heroku[web.1]: Unidling
-2013-11-28T08:24:22.380549+00:00 heroku[web.1]: Idling
-2013-11-28T08:24:22.381406+00:00 heroku[web.1]: State changed from up to down
-2013-11-28T08:24:25.191139+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2013-11-28T08:24:27.342473+00:00 heroku[web.1]: Process exited with status 143
-2013-11-29T10:48:46.858382+00:00 heroku[web.1]: Unidling
-2013-11-29T10:48:46.858382+00:00 heroku[web.1]: State changed from down to starting
-2013-11-29T10:48:53.859899+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/y -Dhttp.port=${PORT}`
-2013-11-29T10:48:54.853700+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS:  -Djava.rmi.server.useCodebaseOnly=true
-2013-11-29T10:48:55.384957+00:00 app[web.1]: Play server process ID is 2
-2013-11-29T10:48:56.725239+00:00 app[web.1]: [[37minfo[0m] play - Application started (Prod)
-2013-11-29T10:48:56.840745+00:00 app[web.1]: [[37minfo[0m] play - Listening for HTTP on /0:0:0:0:0:0:0:0:35576
-2013-11-29T10:48:57.224464+00:00 heroku[web.1]: State changed from starting to up
-2013-11-29T10:48:59.538291+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/US/6580/departing/2013/11/30?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
-2013-11-29T10:49:00.831250+00:00 app[web.1]: $$$$$$$$$$$$$$$$$4 US6580 2013-11-30
-2013-11-29T10:49:01.296811+00:00 heroku[router]: at=info method=GET path=/predictions/US6580/2013-11-30/SFO host=shielded-brook-9642.herokuapp.com fwd="24.130.144.4" dyno=web.1 connect=1ms service=2363ms status=200 bytes=658
-2013-11-29T11:54:57.191374+00:00 heroku[web.1]: Idling
-2013-11-29T11:54:57.191870+00:00 heroku[web.1]: State changed from up to down
-2013-11-29T11:55:01.715077+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-2013-11-29T11:55:06.523092+00:00 heroku[web.1]: Process exited with status 143
-2013-12-01T21:07:31.400770+00:00 heroku[web.1]: State changed from down to starting
-2013-12-01T21:07:31.398314+00:00 heroku[web.1]: Unidling
-2013-12-01T21:07:37.759817+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/y -Dhttp.port=${PORT}`
-2013-12-01T21:07:39.884526+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS:  -Djava.rmi.server.useCodebaseOnly=true
-2013-12-01T21:07:40.491980+00:00 app[web.1]: Play server process ID is 2
-2013-12-01T21:07:42.079181+00:00 app[web.1]: [[37minfo[0m] play - Application started (Prod)
-2013-12-01T21:07:42.300107+00:00 app[web.1]: [[37minfo[0m] play - Listening for HTTP on /0:0:0:0:0:0:0:0:4904
-2013-12-01T21:07:42.794638+00:00 heroku[web.1]: State changed from starting to up
-2013-12-01T21:07:44.870792+00:00 app[web.1]: hotels
-2013-12-01T21:07:44.873136+00:00 app[web.1]: term is hotels
-2013-12-01T21:07:46.121017+00:00 heroku[router]: at=info method=GET path=/recommendations/-122.374889/37.618972/1/hotels/10 host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=2631ms status=200 bytes=33
-2013-12-01T21:07:56.580531+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/502/departing/2013/12/09?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
-2013-12-01T21:07:58.490961+00:00 app[web.1]: acrrie:  -{"fs":"UA","iata":"UA","icao":"UAL","name":"United Airlines","phoneNumber":"1-800-864-8331","active":true}
-2013-12-01T21:07:58.491224+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-12-01T13:07:58.393","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
-2013-12-01T21:07:58.492310+00:00 app[web.1]: UA502 SFO  JFK carrier_name United Airlines ;  time:1635 054
-2013-12-01T21:07:58.491429+00:00 app[web.1]: arrivalAirport:  -{"fs":"JFK","iata":"JFK","icao":"KJFK","faa":"JFK","name":"John F. Kennedy International Airport","street1":"JFK Airport","city":"New York","cityCode":"NYC","stateCode":"NY","postalCode":"11430","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"NYZ178","localTime":"2013-12-01T16:07:58.393","utcOffsetHours":-5,"latitude":40.642335,"longitude":-73.78817,"elevationFeet":13,"classification":1,"active":true}
-2013-12-01T21:07:58.491429+00:00 app[web.1]: 2013-12-09T16:35:00.000 ;2013-12-10T00:54:00.000
-2013-12-01T21:07:59.055605+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-12-09
-2013-12-01T21:07:59.082434+00:00 app[web.1]: end of flgitinfofetcher : Date: 2013-12-09; Carrier : UA; Flight Number: 502's Service quality: 
-2013-12-01T21:07:59.082434+00:00 app[web.1]: Delay on departure in 0 minutes
-2013-12-01T21:07:59.082434+00:00 app[web.1]: Delay on Arrival in 0 minutes.
-2013-12-01T21:07:59.087378+00:00 app[web.1]: !!!!!!!2013-12-09
-2013-12-01T21:07:59.098923+00:00 app[web.1]: query date: ->>>2013-12-09
-2013-12-01T21:07:59.099113+00:00 app[web.1]: QUERY WEATHER:San Francisco-(lat: 37.618972, lng:-122.374889)
-2013-12-01T21:07:59.099929+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=37.618972%2C-122.374889&format=json&date=2013-12-09&key=n82qns68xdvdbs4g9a62tthv
-2013-12-01T21:07:59.555855+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=40.639751%2C-73.778925&format=json&date=2013-12-10&key=n82qns68xdvdbs4g9a62tthv
-2013-12-01T21:07:59.555387+00:00 app[web.1]: QUERY WEATHER:New York-(lat: 40.639751, lng:-73.778925)
-2013-12-01T21:07:59.555189+00:00 app[web.1]: query date: ->>>2013-12-10
-2013-12-01T21:08:12.130877+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/502/departing/2013/12/19?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
-2013-12-01T21:08:12.716370+00:00 app[web.1]: acrrie:  -{"fs":"UA","iata":"UA","icao":"UAL","name":"United Airlines","phoneNumber":"1-800-864-8331","active":true}
-2013-12-01T21:08:12.716692+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-12-01T13:08:12.652","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
-2013-12-01T21:08:12.717338+00:00 app[web.1]: 2013-12-19T16:35:00.000 ;2013-12-20T01:00:00.000
-2013-12-01T21:08:12.717016+00:00 app[web.1]: arrivalAirport:  -{"fs":"JFK","iata":"JFK","icao":"KJFK","faa":"JFK","name":"John F. Kennedy International Airport","street1":"JFK Airport","city":"New York","cityCode":"NYC","stateCode":"NY","postalCode":"11430","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"NYZ178","localTime":"2013-12-01T16:08:12.652","utcOffsetHours":-5,"latitude":40.642335,"longitude":-73.78817,"elevationFeet":13,"classification":1,"active":true}
-2013-12-01T21:08:12.717935+00:00 app[web.1]: UA502 SFO  JFK carrier_name United Airlines ;  time:1635 10
-2013-12-01T21:08:12.720095+00:00 app[web.1]: query date: ->>>2013-12-19
-2013-12-01T21:08:12.719922+00:00 app[web.1]: !!!!!!!2013-12-19
-2013-12-01T21:08:12.719861+00:00 app[web.1]: end of flgitinfofetcher : Date: 2013-12-19; Carrier : UA; Flight Number: 502's Service quality: 
-2013-12-01T21:08:12.719484+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-12-19
-2013-12-01T21:08:12.719861+00:00 app[web.1]: Delay on departure in 0 minutes
-2013-12-01T21:08:12.719861+00:00 app[web.1]: Delay on Arrival in 0 minutes.
-2013-12-01T21:08:12.727530+00:00 app[web.1]: QUERY WEATHER:San Francisco-(lat: 37.618972, lng:-122.374889)
-2013-12-01T21:08:12.732588+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=37.618972%2C-122.374889&format=json&date=2013-12-19&key=n82qns68xdvdbs4g9a62tthv
-2013-12-01T21:08:13.831682+00:00 app[web.1]: QUERY WEATHER:New York-(lat: 40.639751, lng:-73.778925)
-2013-12-01T21:08:13.832216+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=40.639751%2C-73.778925&format=json&date=2013-12-20&key=n82qns68xdvdbs4g9a62tthv
-2013-12-01T21:08:13.831682+00:00 app[web.1]: query date: ->>>2013-12-20
-2013-12-01T21:08:14.834458+00:00 heroku[router]: at=info method=GET path=/predictions/UA502/2013-12-19/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=2699ms status=200 bytes=1695
-2013-12-01T21:08:14.980854+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=8ms status=404 bytes=1910
-2013-12-01T21:08:00.096217+00:00 heroku[router]: at=info method=GET path=/predictions/UA502/2013-12-09/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=4ms service=3606ms status=200 bytes=1696
-2013-12-01T21:07:48.263521+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=29ms status=404 bytes=1910
-2013-12-01T21:08:00.311795+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=23ms status=404 bytes=1910
+2013-12-01T23:33:17.956898+00:00 app[web.1]: hotels
+2013-12-01T23:33:17.956898+00:00 app[web.1]: term is hotels
+2013-12-01T23:33:18.401409+00:00 app[web.1]: transport
+2013-12-01T23:33:18.401409+00:00 app[web.1]: term is transport
+2013-12-01T23:33:18.900939+00:00 app[web.1]: restaurants
+2013-12-01T23:33:18.900939+00:00 app[web.1]: term is restaurants
+2013-12-01T23:33:19.363879+00:00 app[web.1]: term is food
+2013-12-01T23:33:19.363879+00:00 app[web.1]: food
+2013-12-01T23:33:19.768197+00:00 app[web.1]: hotdogs
+2013-12-01T23:33:19.768197+00:00 app[web.1]: term is hotdogs
+2013-12-01T23:33:20.001125+00:00 app[web.1]: shopping
+2013-12-01T23:33:20.001125+00:00 app[web.1]: term is shopping
+2013-12-01T23:33:20.334020+00:00 heroku[router]: at=info method=GET path=/recommendations/-122.374889/37.618972/10/hotels,transport,restaurants,food,hotdogs,shopping/3 host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=54ms service=2395ms status=200 bytes=9966
+2013-12-01T23:41:03.459674+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/US/6580/departing/2013/12/02?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-12-01T23:41:04.041380+00:00 app[web.1]: acrrie:  -{"fs":"US","iata":"US","icao":"AWE","name":"US Airways","phoneNumber":"1-800-943-5436","active":true}
+2013-12-01T23:41:04.045296+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-12-01T15:41:03.964","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
+2013-12-01T23:41:04.046129+00:00 app[web.1]: arrivalAirport:  -{"fs":"IAD","iata":"IAD","icao":"KIAD","faa":"IAD","name":"Washington Dulles International Airport","street1":"1 Aviation Circle","city":"Washington","cityCode":"WAS","stateCode":"DC","postalCode":"20001-6000","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"DCZ001","localTime":"2013-12-01T18:41:03.964","utcOffsetHours":-5,"latitude":38.95315,"longitude":-77.447735,"elevationFeet":313,"classification":1,"active":true}
+2013-12-01T23:41:04.046129+00:00 app[web.1]: 2013-12-02T13:00:00.000 ;2013-12-02T21:00:00.000
+2013-12-01T23:41:04.050759+00:00 app[web.1]: end of flgitinfofetcher : Date: 2013-12-02; Carrier : US; Flight Number: 6580's Service quality: 
+2013-12-01T23:41:04.050759+00:00 app[web.1]: !!!!!!!2013-12-02
+2013-12-01T23:41:04.050872+00:00 app[web.1]: query date: ->>>2013-12-02
+2013-12-01T23:41:04.050759+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-12-01T23:41:04.050541+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-12-02
+2013-12-01T23:41:04.050759+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-12-01T23:41:04.051288+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=37.618972%2C-122.374889&format=json&date=2013-12-02&key=n82qns68xdvdbs4g9a62tthv
+2013-12-01T23:41:04.049882+00:00 app[web.1]: US6580 SFO  IAD carrier_name US Airways ;  time:130 210
+2013-12-01T23:41:04.050937+00:00 app[web.1]: QUERY WEATHER:San Francisco-(lat: 37.618972, lng:-122.374889)
+2013-12-01T23:41:04.482172+00:00 app[web.1]: query date: ->>>2013-12-02
+2013-12-01T23:41:04.482172+00:00 app[web.1]: QUERY WEATHER:Washington-(lat: 38.944533, lng:-77.455811)
+2013-12-01T23:41:04.482652+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=38.944533%2C-77.455811&format=json&date=2013-12-02&key=n82qns68xdvdbs4g9a62tthv
+2013-12-01T23:41:04.899062+00:00 heroku[router]: at=info method=GET path=/predictions/US6580/2013-12-02/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=9ms service=1461ms status=200 bytes=1696
+2013-12-01T23:41:16.801497+00:00 app[web.1]: hotels
+2013-12-01T23:41:16.801717+00:00 app[web.1]: term is hotels
+2013-12-01T23:41:17.343381+00:00 app[web.1]: term is transport
+2013-12-01T23:41:17.343381+00:00 app[web.1]: transport
+2013-12-01T23:41:17.682180+00:00 app[web.1]: restaurants
+2013-12-01T23:41:17.682180+00:00 app[web.1]: term is restaurants
+2013-12-01T23:41:18.169691+00:00 app[web.1]: food
+2013-12-01T23:41:18.169691+00:00 app[web.1]: term is food
+2013-12-01T23:41:18.591886+00:00 app[web.1]: hotdogs
+2013-12-01T23:41:18.591886+00:00 app[web.1]: term is hotdogs
+2013-12-01T23:41:18.835016+00:00 app[web.1]: term is shopping
+2013-12-01T23:41:18.835016+00:00 app[web.1]: shopping
+2013-12-01T23:41:19.212909+00:00 heroku[router]: at=info method=GET path=/recommendations/-122.374889/37.618972/10/hotels,transport,restaurants,food,hotdogs,shopping/3 host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=2426ms status=200 bytes=9966
+2013-12-01T23:48:09+00:00 heroku[slug-compiler]: Slug compilation started
+2013-12-01T23:49:50.612278+00:00 heroku[api]: Deploy ba76c59 by liyingcmu@gmail.com
+2013-12-01T23:49:50.635364+00:00 heroku[api]: Release v18 created by liyingcmu@gmail.com
+2013-12-01T23:49:50+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-12-01T23:49:50.929829+00:00 heroku[web.1]: State changed from up to starting
+2013-12-01T23:49:53.653749+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2013-12-01T23:49:55.608939+00:00 heroku[web.1]: Process exited with status 143
+2013-12-01T23:49:57.897683+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/y -Dhttp.port=${PORT}`
+2013-12-01T23:49:59.106451+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS:  -Djava.rmi.server.useCodebaseOnly=true
+2013-12-01T23:50:00.096053+00:00 app[web.1]: Play server process ID is 2
+2013-12-01T23:50:03.060220+00:00 app[web.1]: [[37minfo[0m] play - Application started (Prod)
+2013-12-01T23:50:03.410478+00:00 app[web.1]: [[37minfo[0m] play - Listening for HTTP on /0:0:0:0:0:0:0:0:5511
+2013-12-01T23:50:03.417265+00:00 heroku[web.1]: State changed from starting to up
+2013-12-01T23:56:49.114020+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/302/departing/2013/12/01?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-12-01T23:56:54.213979+00:00 app[web.1]: $$$$$$$$$$$$$$$$$4 UA302 2013-12-01
+2013-12-01T23:56:57.718273+00:00 heroku[router]: at=info method=GET path=/predictions/UA302/2013-12-01/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=11054ms status=200 bytes=665
+2013-12-01T23:56:58.705805+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=49ms status=404 bytes=1910
+2013-12-01T23:57:08.719416+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/302/departing/2013/12/09?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-12-01T23:57:09.546556+00:00 app[web.1]: $$$$$$$$$$$$$$$$$4 UA302 2013-12-09
+2013-12-01T23:57:09.571065+00:00 heroku[router]: at=info method=GET path=/predictions/UA302/2013-12-09/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=9ms service=888ms status=200 bytes=665
+2013-12-01T23:57:09.762963+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=2ms service=14ms status=404 bytes=1910
+2013-12-01T23:57:21.485564+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/502/departing/2013/12/09?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-12-01T23:57:22.203074+00:00 app[web.1]: acrrie:  -{"fs":"UA","iata":"UA","icao":"UAL","name":"United Airlines","phoneNumber":"1-800-864-8331","active":true}
+2013-12-01T23:57:22.205156+00:00 app[web.1]: departureAirport:  -{"fs":"SFO","iata":"SFO","icao":"KSFO","faa":"SFO","name":"San Francisco International Airport","city":"San Francisco","cityCode":"SFO","stateCode":"CA","postalCode":"94128","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/Los_Angeles","weatherZone":"CAZ508","localTime":"2013-12-01T15:57:22.108","utcOffsetHours":-8,"latitude":37.615215,"longitude":-122.389881,"elevationFeet":11,"classification":1,"active":true}
+2013-12-01T23:57:22.210273+00:00 app[web.1]: arrivalAirport:  -{"fs":"JFK","iata":"JFK","icao":"KJFK","faa":"JFK","name":"John F. Kennedy International Airport","street1":"JFK Airport","city":"New York","cityCode":"NYC","stateCode":"NY","postalCode":"11430","countryCode":"US","countryName":"United States","regionName":"North America","timeZoneRegionName":"America\/New_York","weatherZone":"NYZ178","localTime":"2013-12-01T18:57:22.108","utcOffsetHours":-5,"latitude":40.642335,"longitude":-73.78817,"elevationFeet":13,"classification":1,"active":true}
+2013-12-01T23:57:22.211203+00:00 app[web.1]: 2013-12-09T16:35:00.000 ;2013-12-10T00:54:00.000
+2013-12-01T23:57:22.213063+00:00 app[web.1]: UA502 SFO  JFK carrier_name United Airlines ;  time:1635 054
+2013-12-01T23:57:22.239005+00:00 app[web.1]: @@@@@@@@@@@@@@@@@@ setdepdata 2013-12-09
+2013-12-01T23:57:22.242979+00:00 app[web.1]: Delay on departure in 0 minutes
+2013-12-01T23:57:22.242979+00:00 app[web.1]: end of flgitinfofetcher : Date: 2013-12-09; Carrier : UA; Flight Number: 502's Service quality: 
+2013-12-01T23:57:22.242979+00:00 app[web.1]: Delay on Arrival in 0 minutes.
+2013-12-01T23:57:22.257949+00:00 app[web.1]: connecting....
+2013-12-01T23:57:23.106677+00:00 app[web.1]: !!!!!!!!!!!!!Predicting without weather
+2013-12-01T23:57:23.104082+00:00 app[web.1]: connecting established
+2013-12-01T23:57:23.106054+00:00 app[web.1]: Connection: com.sap.db.jdbc.trace.Connection@732b1047
+2013-12-01T23:57:23.107074+00:00 app[web.1]: 12 -day: 6 - date :09
+2013-12-01T23:57:23.276680+00:00 app[web.1]: !!!!!!!! INSERT INTO TESTINGTABLE VALUES  (1, 12, 6, 4, 'UA', 'SFO', 'JFK', 1830)
+2013-12-01T23:57:23.657258+00:00 app[web.1]: CREATE COLUMN TABLE TESTINGTABLE LIKE PAL_PCDT_DATA_T_Y
+2013-12-01T23:57:23.903640+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_12 LIKE PAL_PCDT_RESULT_T
+2013-12-01T23:57:24.179793+00:00 app[web.1]: CREATE COLUMN TABLE RESULT_SFO_12 LIKE PAL_PCDT_RESULT_T
+2013-12-01T23:57:24.270166+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT(TESTINGTABLE, "PAL_CONTROL",PAL_CDT_JSONMODEL_TBL_12_SFO,RESULT_SFO_12 ) with overview
+2013-12-01T23:57:24.270430+00:00 app[web.1]: predicting..........
+2013-12-01T23:57:24.516071+00:00 app[web.1]: CALL _SYS_AFL.PAL_PREDICTWITHDT(TESTINGTABLE, "PAL_CONTROL",PAL_CDT_JSONMODEL_TBL_12_SFO,RESULT_SFO_12 ) with overview
+2013-12-01T23:57:42.154517+00:00 app[web.1]: dep_delay -1
+2013-12-01T23:57:42.154649+00:00 app[web.1]: --success-------prediction done----
+2013-12-01T23:57:42.154802+00:00 app[web.1]: !!!!!!!2013-12-09
+2013-12-01T23:57:42.158524+00:00 app[web.1]: query date: ->>>2013-12-09
+2013-12-01T23:57:42.158773+00:00 app[web.1]: QUERY WEATHER:San Francisco-(lat: 37.618972, lng:-122.374889)
+2013-12-01T23:57:42.160913+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=37.618972%2C-122.374889&format=json&date=2013-12-09&key=n82qns68xdvdbs4g9a62tthv
+2013-12-01T23:57:42.692363+00:00 app[web.1]: query date: ->>>2013-12-10
+2013-12-01T23:57:42.692995+00:00 app[web.1]: QUERY WEATHER:New York-(lat: 40.639751, lng:-73.778925)
+2013-12-01T23:57:42.696890+00:00 app[web.1]: executing request http://api.worldweatheronline.com/premium/v1/weather.ashx?q=40.639751%2C-73.778925&format=json&date=2013-12-10&key=n82qns68xdvdbs4g9a62tthv
+2013-12-01T23:57:44.095582+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=3ms service=16ms status=404 bytes=1910
+2013-12-01T23:58:18.822474+00:00 app[web.1]: executing request https://api.flightstats.com/flex/schedules/rest/v1/json/flight/UA/502/departing/2013/12/07?extendedOptions=useInlinedReferences&appId=a2d81565&appKey=90c0ac5457d9ac6d80ddb19545b3ca29
+2013-12-01T23:58:19.521534+00:00 heroku[router]: at=info method=GET path=/predictions/UA502/2013-12-07/SFO host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=8ms service=773ms status=200 bytes=665
+2013-12-01T23:58:19.519265+00:00 app[web.1]: $$$$$$$$$$$$$$$$$4 UA502 2013-12-07
+2013-12-01T23:58:19.706889+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=shielded-brook-9642.herokuapp.com fwd="209.129.244.250" dyno=web.1 connect=12ms service=16ms status=404 bytes=1910

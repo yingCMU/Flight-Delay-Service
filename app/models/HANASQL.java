@@ -41,30 +41,25 @@ public class HANASQL {
 	private int quater;
 
 	private String testing_type="PAL_PCDT_DATA_T_Y";
-	private String testing_type_w="PAL_PCDT_DATA_W";
+	private String testing_type_w="PAL_DT_P_DATA_T_WEATHER";
 	
 	
 	public static void main(String[] args){
 		HANASQL hana= new HANASQL();
-		hana.classify_w();
+		//hana.classify_w();
 		//hana.classify();
-		/*hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8");
-		for(int month=6;month<=6;month++){
-		if(month==5) continue;
-		hana.i=month;
-		//
-		hana.classify(hana.i);
-		hana.statisticDevika(hana.i);
+		hana.fq = FlightInfoFetcher.fetch("AA1673","2013-11-8","SFO");
+		
 	
-		}
+		
 		//hana.train(11);
-	hana.classify(11);
+	
 		try {
 			HANASQL.con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} */
+		} 
 		System.out.println("----all done :P -----------");
 	}
 	
@@ -80,10 +75,10 @@ public class HANASQL {
 			 Date depDate;
 			depDate = inputDF.parse(depDateStr);
 			classify();
-			/*if(depDate.getTime()-today.getTime() <= 10*86400000)
+			if(depDate.getTime()-today.getTime() <= 10*86400000)
 				 classify();
 			else 
-				classify_w();*/
+				classify_w();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,10 +166,10 @@ public class HANASQL {
 		System.out.println("Predicting with weather");
 		//testingtable="FLIGHT_"+i;
 		resulttable="RESULT_SFO_"+month;
-		String json = "PAL_DT_T_MODEL_JSON_TBL_WEATHER_12_JFK";
+		String json = "PAL_DT_T_MODEL_JSON_TBL_WEATHER_11_SFO";
 		//String json= "PAL_DT_T_MODEL_TBL_TBL_WEATHER_"+month+"_"+fq.departAirport.iataCode;
 		//hana.test();
-		testingtable="TESTINGTABLE_W";
+		testingtable="TESTINGTABLE_WEATHER";
 		drop(testingtable,"TABLE");
 		createTestingTable_w(testingtable,testing_type_w);
 		createTable(resulttable,"PAL_PCDT_RESULT_T");
@@ -226,7 +221,7 @@ public class HANASQL {
 	 public void drop(String view,String type){
 		 String st1= "set schema FLIGHT_DELAY";
 		 String st2= "DROP "+type+"  "+view;
-			//System.out.println(st2);
+			System.out.println(st2);
 			 Statement stmt;
 			try {
 				stmt = con.createStatement();
@@ -570,17 +565,17 @@ public class HANASQL {
 	  * PAL_PCDT_RESULT_TBL
 	  */
 	 public void callProcP(String proc,String testing,  String result,String json){
-		 String st1= "set schema FLIGHT_DELAY";
-		 String st= "CALL "+proc+"("+testing+", "+"\"PAL_CONTROL\","+json+","+ result+" ) with overview";
+		 //String st1= "set schema FLIGHT_DELAY";
+		 String st= "CALL "+proc+"("+testing+", "+"\"PAL_CONTROL_W\","+json+","+ result+" ) with overview";
 		 
 		 System.out.println(st+"\npredicting..........");
 			Statement stmt;
 			try {
 				stmt = con.createStatement();
-				stmt.executeUpdate(st1);
+				//stmt.executeUpdate(st1);
 				CallableStatement callstmt = con.prepareCall(st);
 				 
-				 System.out.println(st);
+				 
 				 callstmt.execute();
 				
 				/* while(resultSet.next()){
@@ -706,17 +701,17 @@ public class HANASQL {
 				 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 	 }
 public void createTestingTable_w(String name,String type){
-		 String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'JFK', 'SFO', 10, 0, 0, 50, 8, 1)";
+		 String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 10, 0, 0, 50, 8, 1)";
 		 //String st3 = "INSERT INTO "+name+" VALUES  (1, "+month+", "+day+", "+quater+", '"+fq.airline+"', '"+fq.departAirport.iataCode+"', '"+fq.arrivalAirport.iataCode+"', 1830)";
 	     
 	     /*fq.departWeather.humidity
 	      * 
 	      */
-		 String st2="CREATE COLUMN TABLE "+name+" LIKE "+type;// ";
+		 String st2="CREATE  TABLE "+name+" LIKE "+type;// ";
 		 String st1= " set schema FLIGHT_DELAY";
 		// String st3 = "INSERT INTO "+name+" VALUES (1, 24, 6, 4, 'OO', 'SFO', 'JFK', 1830)";	
 		 
@@ -739,7 +734,7 @@ public void createTestingTable_w(String name,String type){
 				 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 	 }
 	 public  Statement update( String st) throws SQLException{
